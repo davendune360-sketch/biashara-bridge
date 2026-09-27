@@ -1,0 +1,1836 @@
+/* ============================================================
+   Base / reset
+   ============================================================ */
+:root{
+  --ink:#183735;--muted:#67807c;--cream:#f7f4ee;--paper:#fffdfa;--line:#e8e4dc;
+  --teal:#0a6d5c;--orange:#ef8f52;--blue:#769dc7;--green:#8dab68
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:15px 'DM Sans',sans-serif}
+.app-shell{min-height:100vh;display:flex}
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+.sidebar{width:246px;flex:none;background:#113d38;color:#ecf4ec;padding:30px 20px;display:flex;flex-direction:column}
+.brand{color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px;line-height:.85;font-size:18px;letter-spacing:-.8px}
+.brand b{font-family:Fraunces,serif;font-size:19px}
+.brand-mark{background:#e89960;color:#173c37;width:35px;height:35px;border-radius:11px;display:grid;place-items:center;font:700 22px Fraunces,serif}
+.sidebar nav{margin-top:57px;display:grid;gap:9px}
+.nav-link{color:#c0d4cb;text-decoration:none;padding:11px 13px;border-radius:9px;display:flex;gap:12px;align-items:center}
+.nav-link span{font-size:20px;width:18px;text-align:center}
+.nav-link.active{background:#286159;color:#fff}
+.nav-link em{font-style:normal;margin-left:auto;background:#e89960;color:#173c37;font-size:11px;font-weight:bold;padding:2px 7px;border-radius:10px}
+.sidebar-bottom{margin-top:auto}
+.help-card{background:#24534d;padding:16px;border-radius:13px;color:#deebe5}
+.help-card p{font-size:12px;line-height:1.5;color:#b9d2c8}
+.help-card button{border:0;background:transparent;color:#fff;font-weight:700;padding:0;cursor:pointer}
+.sidebar small{display:block;color:#93b4a9;margin:20px 7px 0;font-size:11px}
+.back-dashboard{border:0;width:100%;text-align:left;font:15px 'DM Sans';cursor:pointer}
+
+/* ============================================================
+   Main layout
+   ============================================================ */
+main{width:min(100%,1200px);margin:0 auto;padding:34px 52px 48px}
+.topbar{display:flex;justify-content:space-between;align-items:center}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.4px;color:#7e938e;margin:0 0 7px}
+.topbar h1{font:600 24px Fraunces,serif;margin:0;letter-spacing:-.6px}
+.topbar h1 span{font-family:sans-serif;font-size:20px}
+.profile{width:37px;height:37px;border:0;border-radius:50%;background:#b6c799;color:#244337;font-weight:700;flex:0 0 37px;min-width:37px;aspect-ratio:1/1}
+.menu-button{display:none}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.cloud-button{border:1px solid #c9d8d0;background:#edf4ef;color:#2a6d5d;border-radius:20px;padding:8px 12px;cursor:pointer;font:700 11px 'DM Sans'}
+.profile{cursor:pointer;overflow:hidden;padding:0}
+.profile img{width:100%;height:100%;object-fit:cover}
+
+/* ============================================================
+   Hero + Stats
+   ============================================================ */
+.hero{display:flex;justify-content:space-between;align-items:end;margin:65px 0 34px}
+.hero h2,.section-heading h2,.modal-title h2{font:600 35px/1.1 Fraunces,serif;letter-spacing:-1.3px;margin:0}
+.hero h2 i{color:var(--teal);font-style:italic}
+.hero-copy{max-width:455px;color:var(--muted);line-height:1.55;margin:16px 0 0}
+.primary,.secondary{font:600 14px 'DM Sans';cursor:pointer;border-radius:8px;padding:12px 17px;border:0}
+.primary{background:var(--teal);color:#fff;box-shadow:0 4px 11px #0a6d5c2c}
+.primary:hover{background:#075447}
+.secondary{background:#e6f0e6;color:#166453}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.stats article{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:19px 20px;position:relative}
+.stats p{color:var(--muted);font-size:13px;margin:14px 0 5px}
+.stats strong{font:600 25px Fraunces,serif}
+.stats small{display:block;color:#8ba08f;font-size:11px;margin-top:7px}
+.stat-icon{position:absolute;right:18px;top:18px;border-radius:9px;width:31px;height:31px;display:grid;place-items:center;font-weight:bold}
+.orange{color:#bd6732;background:#f9eadf}
+.blue{color:#527ba8;background:#eaf0f7}
+.green{color:#6d9352;background:#edf3e7}
+
+/* ============================================================
+   Section headings
+   ============================================================ */
+.orders-section{margin-top:48px}
+.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:17px}
+.section-heading h2{font-size:25px}
+.filters{display:flex;background:#123f39;padding:4px;border-radius:9px;gap:3px}
+.filter{border:0;background:transparent;color:#c5ddd2;padding:7px 12px;cursor:pointer;border-radius:6px;font:700 12px 'DM Sans'}
+.filter.active{background:#e89960;color:#173c37}
+.filter:hover{background:#24564f;color:#fff}
+.filter.active:hover{background:#f0a875;color:#173c37}
+
+/* ============================================================
+   Generic tables (base)
+   ============================================================ */
+.table-wrap{border-radius:13px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:15px 20px;color:#84938f;font-size:10px;letter-spacing:.8px}
+td{padding:15px 20px;border-top:1px solid #eeeae3;color:#4f6561;font-size:13px}
+
+/* ============================================================
+   Orders table
+   ============================================================ */
+.customer-cell b{display:block;color:var(--ink);font-size:14px}
+.customer-cell small{font-size:11px;color:#92a09c}
+.channel{display:inline-flex;align-items:center;gap:5px}
+.dot{width:7px;height:7px;background:#55b876;border-radius:50%}
+.delete{border:0;background:transparent;color:#9ca9a5;font-size:18px;cursor:pointer}
+.status-select{border:0;margin:0;padding:6px 8px;width:auto;font:700 11px 'DM Sans';border-radius:20px;cursor:pointer}
+.status-select.pending{background:#fff1de;color:#ad6b25}
+.status-select.paid,.status-select.delivered{background:#e6f2e8;color:#397a51}
+.status-select.preparing{background:#eaf0f7;color:#527ba8}
+.receipt-button{border:0;background:#eef0eb;color:#546963;border-radius:6px;padding:6px 8px;cursor:pointer;font:700 11px 'DM Sans'}
+.mark-paid{border:0;background:#e5f1e7;color:#28764b;border-radius:6px;padding:6px 8px;cursor:pointer;font:700 11px 'DM Sans'}
+
+/* Orders table header — match inventory + customers look */
+.orders-section .table-wrap table th{
+  background:#f1f4ed;
+  color:#668078;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  text-align:left;
+  padding:13px 15px;
+  border-bottom:1px solid var(--line);
+}
+.orders-section .table-wrap table td{padding:13px 15px}
+.orders-section .table-wrap table td{border-top:0}
+.orders-section .table-wrap table{border-radius:11px}
+
+/* Per-line order breakdown */
+.order-lines{display:block;margin-top:6px}
+.order-line{display:block;font-size:12px;color:#4f6561;padding:3px 0;line-height:1.5}
+.order-line b{color:var(--ink);font-weight:700}
+.order-line .line-specs{color:#8a6a3c;font-style:italic;font-weight:500}
+.sold-date{display:block;color:#42766a;font-size:11px;margin-top:4px;font-weight:700}
+.mpesa{display:block;color:#788d87;font-size:11px;margin-top:4px}
+
+/* Distinguish each order row */
+.orders-section tbody tr{border-top:3px solid #d6ded6}
+.orders-section tbody tr:first-child{border-top:0}
+.orders-section tbody td{padding-top:18px;padding-bottom:18px}
+
+/* ============================================================
+   Empty state
+   ============================================================ */
+.empty-state{text-align:center;padding:51px 15px}
+.empty-state div{font-size:29px;color:#e89960}
+.empty-state h3{font:600 19px Fraunces;margin:9px}
+.empty-state p{color:var(--muted);margin:0 0 17px;font-size:13px}
+.empty-actions{display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:6px}
+.empty-actions button{min-width:190px}
+
+/* ============================================================
+   Tip
+   ============================================================ */
+.tip{display:flex;gap:14px;background:#e3eee3;border-radius:12px;margin-top:32px;padding:17px 21px;color:#39604d}
+.tip span{font-size:21px;color:#ef8f52}
+.tip p{margin:4px 0 0;color:#698575;font-size:13px;line-height:1.45}
+
+/* ============================================================
+   Dialogs
+   ============================================================ */
+dialog{border:0;border-radius:16px;padding:0;width:min(460px,calc(100% - 28px));box-shadow:0 20px 60px #12342d45}
+dialog::backdrop{background:#173b35aa}
+dialog form{padding:26px}
+.modal-title{display:flex;justify-content:space-between;align-items:start;margin-bottom:20px}
+.modal-title h2{font-size:27px}
+.close{font-size:27px;line-height:20px;border:0;background:none;color:#879590;cursor:pointer}
+label{color:#526762;font-size:12px;font-weight:700;display:block;margin-top:13px}
+input,select{font:14px 'DM Sans';width:100%;margin-top:6px;border:1px solid #d9ded6;border-radius:7px;padding:11px;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:2px solid #91c5b9;border-color:transparent}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.submit{width:100%;margin-top:22px}
+
+/* ============================================================
+   Confirm dialog — theme-correct
+   ============================================================ */
+#confirmDialog{width:min(420px,calc(100% - 28px));border-radius:16px;border:0;padding:0;background:transparent}
+#confirmDialog::backdrop{background:#173b35aa}
+#confirmDialog .confirm-box{padding:30px 26px 24px;text-align:center;background:#fffdfa;border-radius:16px;box-shadow:0 20px 60px #12342d45}
+#confirmDialog .confirm-icon{width:52px;height:52px;border-radius:50%;background:#fbe6d8;color:#b35a2e;display:grid;place-items:center;margin:0 auto 16px;font-size:24px}
+#confirmDialog h2{font:700 22px Fraunces,serif;margin:0 0 10px;color:#183735}
+#confirmDialog p{color:#5c7570;font-size:14px;line-height:1.55;margin:0 0 22px}
+#confirmDialog .confirm-actions{display:flex;gap:10px}
+#confirmDialog .confirm-actions button{flex:1;padding:12px 14px;font:700 13px 'DM Sans';border-radius:9px;cursor:pointer;border:0}
+#confirmDialog .secondary{background:#e6f0e6;color:#166453}
+#confirmDialog .secondary:hover{background:#d6e6d6}
+#confirmDialog .danger-button{background:#b85e47;color:#fff}
+#confirmDialog .danger-button:hover{background:#984936}
+
+/* ============================================================
+   Info dialog (success confirmations)
+   ============================================================ */
+#infoDialog{width:min(400px,calc(100% - 28px));border-radius:16px}
+.info-box{padding:28px 24px 22px;text-align:center;background:var(--paper);border-radius:16px}
+.info-icon{width:50px;height:50px;border-radius:50%;background:#e3eee3;color:#2a6b4f;display:grid;place-items:center;margin:0 auto 14px;font-size:24px;font-weight:700}
+.info-box h2{font:700 21px Fraunces,serif;margin:0 0 10px;color:var(--ink)}
+.info-box p{color:#5c7570;font-size:14px;line-height:1.55;margin:0 0 20px}
+.info-actions{display:flex}
+.info-actions button{flex:1;padding:12px 14px;font:700 13px 'DM Sans';border-radius:9px;cursor:pointer;border:0}
+
+/* ============================================================
+   Cloud dialog
+   ============================================================ */
+.cloud-status{background:#f2f5ed;color:#607972;border-radius:9px;padding:12px;font-size:13px;line-height:1.45}
+.cloud-actions{display:flex;flex-direction:row;align-items:stretch;gap:9px}
+.cloud-actions button{flex:1 1 0;min-width:0;height:36px!important;min-height:36px!important;padding:0 12px!important;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;line-height:1}
+.cloud-actions .submit{margin-top:0!important}
+.cloud-actions .primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.forgot-password-row{margin:10px 0 0}
+.cloud-dismiss-row{margin:14px 0 0;text-align:center}
+.cloud-dismiss-row .link-button{color:var(--muted);text-decoration:none;font-weight:600}
+.cloud-dismiss-row .link-button:hover{color:var(--teal);text-decoration:underline}
+.link-button{border:0;background:none;padding:0;color:var(--teal);font:700 12px 'DM Sans';cursor:pointer;text-decoration:underline}
+.link-button:hover{color:#075447}
+.step-copy{color:var(--muted);font-size:13px;line-height:1.5;margin:4px 0 16px}
+.auth-alert{display:flex;gap:10px;align-items:flex-start;background:#fdecea;border:1px solid #f3b4ab;border-radius:9px;padding:12px 14px;margin-bottom:14px}
+.auth-alert-icon{font-size:16px;line-height:1.3;color:#c0392b}
+.auth-alert b{display:block;font-size:11px;letter-spacing:1.2px;color:#c0392b;margin-bottom:2px}
+.auth-alert p{margin:0;font-size:13px;line-height:1.4;color:#8a2c1d}
+
+/* ============================================================
+   Receipt
+   ============================================================ */
+.receipt{padding:27px;min-width:300px}
+.receipt h2{font:600 27px Fraunces;margin:0 0 20px}
+.receipt p{border-bottom:1px solid #e9e9e2;padding-bottom:9px;color:#637872}
+.receipt p b{float:right;color:#183735}
+.receipt small{color:#83918d}
+.receipt-actions{padding:0 27px 24px;display:flex;gap:9px;justify-content:flex-end}
+.receipt-lines{margin:14px 0;border-top:1px solid #e9e9e2;border-bottom:1px solid #e9e9e2;padding:10px 0}
+.receipt-line{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:8px 0;font-size:13px;color:#4f6561}
+.receipt-line b{color:#183735}
+.receipt-line-specs{display:block;font-size:11px;color:#8a6a3c;font-style:italic;font-weight:500;margin-top:2px}
+.receipt-variation{background:#f2f5ed;border-radius:9px;padding:12px;margin:12px 0;overflow-wrap:anywhere}
+.receipt-variation span{display:block;color:#6f837d;font-size:11px;text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px}
+.receipt-variation b{display:block;white-space:pre-wrap;line-height:1.45}
+
+/* ============================================================
+   Profile dialog
+   ============================================================ */
+.avatar-editor{display:flex;align-items:center;gap:13px;background:#f2f5ed;padding:12px;border-radius:10px}
+.avatar-editor p{margin:3px 0 0;color:#6f837d;font-size:12px;line-height:1.4}
+.avatar-upload{position:relative;margin:0;width:54px;height:54px;border-radius:50%;overflow:hidden;background:#b6c799;display:grid;place-items:center;color:#244337;cursor:pointer}
+.avatar-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.avatar-upload img{width:100%;height:100%;object-fit:cover}
+.avatar-upload span{font-weight:700}
+
+/* ============================================================
+   Settings dialog
+   ============================================================ */
+.settings-block{background:#f2f5ed;border-radius:10px;padding:14px}
+.settings-block p{color:#6f837d;font-size:12px;line-height:1.45;margin:5px 0 12px}
+.settings-cloud-actions{display:flex;gap:8px;margin-top:10px}
+.settings-cloud-actions button{flex:1}
+.appearance-options{display:flex;gap:8px}
+.appearance-option{flex:1}
+.appearance-option.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#settingsDialog .settings-block{margin-bottom:14px}
+#settingsDialog .settings-block:last-of-type{margin-bottom:0}
+.danger-settings{border:1px solid #e4b6a8;background:#fff2ed}
+.danger-settings p{color:#936050}
+.danger-button{border:0;border-radius:7px;background:#b85e47;color:#fff;padding:9px 12px;cursor:pointer;font:700 12px 'DM Sans'}
+.danger-button:hover{background:#984936}
+
+/* ============================================================
+   Welcome + Tour + Reminder
+   ============================================================ */
+#welcomeDialog{width:min(440px,calc(100% - 28px))}
+.welcome-box{padding:32px 26px 26px;text-align:center;background:var(--paper);border-radius:16px}
+.welcome-box .eyebrow{color:#8ba08f;margin-bottom:8px}
+.welcome-box h2{font:700 26px Fraunces,serif;margin:0 0 8px;color:var(--ink)}
+.welcome-box p{color:#5c7570;font-size:14px;line-height:1.55;margin:0 0 8px}
+.welcome-box .welcome-sub{color:#7a8e88;font-size:13px;margin:14px 0 20px}
+.welcome-actions{display:flex;flex-direction:column;gap:8px}
+.welcome-actions button{padding:12px 14px;font:700 13px 'DM Sans';border-radius:9px;cursor:pointer}
+
+#tourDialog{width:min(440px,calc(100% - 28px))}
+.tour-box{padding:28px 26px 22px;background:var(--paper);border-radius:16px}
+.tour-box .eyebrow{color:#8ba08f;margin-bottom:6px}
+.tour-box h2{font:700 22px Fraunces,serif;margin:0 0 10px;color:var(--ink)}
+.tour-box p{color:#5c7570;font-size:14px;line-height:1.6;margin:0 0 20px}
+.tour-actions{display:flex;gap:9px}
+.tour-actions button{flex:1;padding:11px 14px;font:700 13px 'DM Sans';border-radius:9px;cursor:pointer}
+
+#signInReminderDialog{width:min(420px,calc(100% - 28px))}
+.reminder-box{padding:28px 26px 22px;text-align:center;background:var(--paper);border-radius:16px}
+.reminder-icon{width:48px;height:48px;border-radius:50%;background:#e6efff;color:#3b6fb0;display:grid;place-items:center;margin:0 auto 14px;font-size:22px}
+.reminder-box h2{font:700 20px Fraunces,serif;margin:0 0 10px;color:var(--ink)}
+.reminder-box p{color:#5c7570;font-size:14px;line-height:1.55;margin:0 0 20px}
+.reminder-actions{display:flex;gap:9px}
+.reminder-actions button{flex:1;padding:11px 14px;font:700 13px 'DM Sans';border-radius:9px;cursor:pointer}
+
+/* ============================================================
+   Cloud nudge banner
+   ============================================================ */
+.cloud-nudge-banner{display:flex;align-items:center;gap:10px;background:#fff5e6;border:1px solid #f1d5a8;color:#7a5220;padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:13px;line-height:1.4}
+.cloud-nudge-banner .nudge-icon{font-size:16px;color:#c07b1f}
+.cloud-nudge-banner .nudge-text{flex:1}
+.cloud-nudge-banner .nudge-action{border:0;background:#c07b1f;color:#fff;padding:7px 14px;border-radius:7px;cursor:pointer;font:700 12px 'DM Sans'}
+.cloud-nudge-banner .nudge-action:hover{background:#a36312}
+.cloud-nudge-banner .nudge-dismiss{border:0;background:transparent;color:#a07840;font-size:18px;cursor:pointer;padding:0 6px;line-height:1}
+.cloud-nudge-banner .nudge-dismiss:hover{color:#7a5220}
+
+/* ============================================================
+   Inventory
+   ============================================================ */
+.inventory-section,.customers-section{margin-top:48px}
+.inventory-grid{display:block}
+.inventory-empty,.muted-copy{background:#fffdfa;border:1px dashed #d8ddd5;border-radius:10px;padding:18px;color:#70837e;font-size:13px}
+
+.inventory-table,.customer-table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.inventory-table th,.customer-table th{background:#f1f4ed;color:#668078;font-size:10px;text-transform:uppercase;letter-spacing:.8px;text-align:left}
+.inventory-table th,.inventory-table td,.customer-table th,.customer-table td{padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:middle}
+.inventory-table tr:last-child td,.customer-table tr:last-child td{border-bottom:0}
+.inventory-table small,.customer-table small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.low-stock{color:#bd6732!important}
+.muted-dash{color:var(--muted);font-weight:700}
+.variant-branch{color:var(--muted);margin-right:4px;font-weight:700}
+
+/* Inventory parent + variant rows */
+.inventory-table tr.parent-row td{border-top:2px solid var(--line);padding-top:14px;padding-bottom:14px}
+.inventory-table tr.variant-row{background:#f8faf5}
+.inventory-table tr.variant-row td{padding-top:10px;padding-bottom:10px;border-top:1px dashed #dfe6da;font-size:12px}
+.variant-row.hidden-row{display:none}
+
+/* Variant toggle */
+.variant-toggle{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:#e5f1e7;color:#28764b;border:0;font-size:13px;font-weight:700;cursor:pointer;margin-right:8px;vertical-align:middle;transition:transform .15s}
+.variant-toggle.collapsed{transform:rotate(-90deg)}
+.variant-count{color:var(--muted);font-size:11px;margin-left:6px;font-weight:600}
+
+/* ============================================================
+   Row actions / three-dot menus
+   ============================================================ */
+.row-actions{text-align:right;white-space:nowrap}
+.action-menu{position:relative;display:inline-block}
+.action-menu summary{list-style:none;cursor:pointer;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-size:21px}
+.action-menu summary::-webkit-details-marker{display:none}
+.action-menu summary:hover{background:#e5f1e7;color:#28764b}
+.action-menu>div{position:absolute;right:0;z-index:3;display:grid;gap:4px;min-width:100px;padding:7px;background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 25px #18373524}
+.action-menu button{border:0;background:transparent;text-align:left;padding:7px 8px;border-radius:5px;color:var(--ink);font:600 11px 'DM Sans';cursor:pointer}
+.action-menu button:hover{background:#e5f1e7;color:#28764b}
+
+/* Inventory row ⋮ */
+.inventory-table .row-actions{text-align:right;white-space:nowrap;vertical-align:middle;padding-right:14px}
+.inventory-table .row-actions::before{content:''}
+.inventory-table .action-menu{position:relative;display:inline-block}
+.inventory-table .action-menu summary{list-style:none;cursor:pointer;width:32px;height:32px;border-radius:50%;display:inline-grid;place-items:center;color:var(--muted);font-size:21px;background:transparent}
+.inventory-table .action-menu summary::-webkit-details-marker{display:none}
+.inventory-table .action-menu summary:hover{background:#e5f1e7;color:#28764b}
+.inventory-table .action-menu>div{position:absolute;right:0;top:38px;bottom:auto;z-index:999;display:grid;gap:4px;min-width:150px;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 36px #18373540}
+.inventory-table .action-menu:not([open])>div{display:none}
+.inventory-table .action-menu button{border:0;background:transparent;text-align:left;padding:10px 14px;border-radius:6px;color:var(--ink);font:600 13px 'DM Sans';cursor:pointer;width:100%}
+.inventory-table .action-menu button:hover{background:#e5f1e7;color:#28764b}
+
+/* Orders row ⋮ */
+.orders-section .row-actions{text-align:right;white-space:nowrap;position:relative}
+.order-action-menu{position:relative;display:inline-block}
+.order-action-menu summary{list-style:none;cursor:pointer;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-size:21px}
+.order-action-menu summary::-webkit-details-marker{display:none}
+.order-action-menu summary:hover{background:#e5f1e7;color:#28764b}
+.order-action-menu>div{position:absolute;right:0;top:38px;bottom:auto;z-index:999;display:grid;gap:4px;min-width:130px;padding:8px;background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 16px 36px #18373540}
+.order-action-menu:not([open])>div{display:none}
+.order-action-menu button{border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:5px;color:var(--ink);font:600 12px 'DM Sans';cursor:pointer;width:100%}
+.order-action-menu button:hover{background:#e5f1e7;color:#28764b}
+.order-action-menu .delete{color:#ad5e43}
+
+/* Prevent clipping + flip for last rows */
+.inventory-grid .table-wrap{overflow:visible}
+.orders-section .table-wrap{overflow:visible}
+.inventory-table{border-radius:11px}
+.inventory-table .action-menu[open]{z-index:100}
+.inventory-table .action-menu>div{z-index:999}
+.inventory-table .action-menu[open] summary{background:#e5f1e7;color:#28764b}
+.inventory-table tr:nth-last-child(-n+2) .action-menu>div{top:auto;bottom:38px}
+.inventory-table tr.variant-row:nth-last-child(-n+2) .action-menu>div{top:auto;bottom:38px}
+.orders-section .order-action-menu[open]{z-index:100}
+.orders-section .order-action-menu>div{z-index:999}
+.orders-section .order-action-menu[open] summary{background:#e5f1e7;color:#28764b}
+.orders-section tbody tr:last-child .order-action-menu>div,
+.orders-section tbody tr:nth-last-child(-n+2) .order-action-menu>div{top:auto;bottom:38px}
+
+/* ============================================================
+   Section-level clear menus (orders / inventory / customers)
+   ============================================================ */
+.orders-search-row{display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.orders-search-row .search-label{margin:0;flex:1;max-width:330px}
+.orders-menu{position:relative;display:inline-block}
+.orders-menu summary{list-style:none;cursor:pointer;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-size:22px;background:transparent;border:0;padding:0;line-height:1}
+.orders-menu summary::-webkit-details-marker{display:none}
+.orders-menu summary:hover{background:#e5f1e7;color:#28764b}
+.orders-menu>div{position:absolute;right:0;bottom:44px;top:auto;z-index:999;display:grid;gap:4px;min-width:150px;padding:7px;background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 25px #18373524}
+.orders-menu:not([open])>div{display:none}
+.orders-menu button{border:0;background:transparent;text-align:left;padding:9px 14px;border-radius:5px;color:#ad5e43;font:600 12px 'DM Sans';cursor:pointer}
+.orders-menu button:hover{background:#f9e9e4;color:#8a3d28}
+.inventory-menu{margin-left:2px}
+.inventory-menu>div{bottom:44px;top:auto}
+.customers-menu{margin-left:2px}
+.customers-menu>div{bottom:44px;top:auto}
+
+/* ============================================================
+   Order items rows
+   ============================================================ */
+.order-items-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.order-items-heading label{margin:0}
+.order-item-row{display:grid;grid-template-columns:minmax(0,1.4fr) 70px 95px 28px;gap:7px;align-items:center;margin-bottom:8px}
+.order-item-row input{margin:0}
+.remove-order-item{border:0;background:#f9e9e4;color:#ad5e43;width:28px;height:28px;border-radius:50%;cursor:pointer}
+.service-row .order-quantity{visibility:hidden}
+.order-combo-select{font:14px 'DM Sans';width:100%;margin:0;border:1px solid #d9ded6;border-radius:7px;padding:11px;background:#fff;color:var(--ink)}
+.order-combo-select:focus{outline:2px solid #91c5b9;border-color:transparent}
+
+/* ============================================================
+   Payment method fields
+   ============================================================ */
+#paymentOtherLabel{margin-top:12px}
+#paymentOtherLabel[hidden]{display:none!important}
+#paymentReferenceLabel[hidden]{display:none!important}
+
+/* ============================================================
+   Variant editor (add/edit product)
+   ============================================================ */
+.variant-edit-row{display:grid;grid-template-columns:minmax(0,1.6fr) 100px 90px 28px;gap:6px;align-items:center;margin-bottom:6px}
+.variant-edit-row input{margin:0;font-size:13px;padding:9px 10px}
+.remove-variant{border:0;background:#f9e9e4;color:#ad5e43;width:28px;height:28px;border-radius:50%;cursor:pointer}
+.variant-hint{font-size:11px;color:var(--muted);margin:6px 0 0;line-height:1.4}
+.multiline-field{grid-column:1/-1}
+.multiline-field textarea{width:100%;min-height:82px;resize:vertical;line-height:1.45}
+
+/* ============================================================
+   Restock variant picker
+   ============================================================ */
+.restock-section-label{font-size:12px;color:var(--muted);margin:14px 0 8px;font-weight:700;letter-spacing:.3px}
+.restock-variant-row{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:9px;margin-bottom:8px;background:#fafcf8}
+.restock-variant-info b{display:block;font-size:13px}
+.restock-variant-info small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.restock-variant-amount{margin:0;font:14px 'DM Sans';padding:9px 10px;border:1px solid #d9ded6;border-radius:7px;width:100%}
+.restock-product{background:#f2f5ed;border-radius:9px;padding:12px;margin-bottom:12px}
+.restock-product b,.restock-product small{display:block}
+.restock-product small{color:#6e837d;font-size:12px;margin-top:3px}
+.restock-new-variant{margin-top:14px;border:1px dashed #d8ddd5;border-radius:9px;padding:12px}
+.restock-new-variant summary{cursor:pointer;font:700 12px 'DM Sans';color:var(--teal);list-style:none;outline:none}
+.restock-new-variant summary::-webkit-details-marker{display:none}
+.restock-new-variant summary::before{content:'+ ';}
+.restock-new-variant-inner{margin-top:10px}
+
+/* ============================================================
+   Customers
+   ============================================================ */
+.customer-list{display:block;width:100%}
+.customer-tools{display:flex;align-items:center;gap:8px}
+.customer-search{position:relative;margin:0}
+.customer-search span{position:absolute;left:10px;top:9px;color:var(--muted);font-size:16px}
+.customer-search input{width:170px;margin:0;padding-left:29px}
+.customers-section,.customers-section .customer-list,.customers-section .customer-list .table-wrap,.customers-section .customer-table{width:100%;max-width:none;min-width:0}
+.customers-section .customer-list .table-wrap{grid-column:1 / -1}
+.edit-customer{border:0;background:#e5f1e7;color:#28764b;border-radius:6px;padding:6px 8px;cursor:pointer;font:700 11px 'DM Sans';margin-left:10px}
+.remove-customer{border:0;background:#f9e9e4;color:#ad5e43;border-radius:6px;padding:6px 8px;cursor:pointer;font:700 11px 'DM Sans';margin-left:6px}
+
+/* ============================================================
+   Inventory tools
+   ============================================================ */
+.inventory-tools{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:nowrap;margin-left:auto}
+.inventory-tools>label{margin:0;white-space:nowrap}
+.inventory-search{position:relative;flex:0 0 150px;min-width:150px;max-width:150px;height:36px}
+.inventory-search span{position:absolute;left:10px;top:9px;color:var(--muted);font-size:16px}
+.inventory-search input{width:100%;height:36px;margin:0;padding-left:29px;padding-top:8px;padding-bottom:8px}
+.low-stock-control{display:inline-flex;align-items:center;gap:5px;font-size:11px;line-height:1;height:36px;width:88px;justify-content:space-between}
+.low-stock-control input{display:block;align-self:center;box-sizing:border-box;margin:0!important;padding:0!important;width:36px;height:36px;min-height:36px;line-height:34px;text-align:center;border:1px solid #c9d8d0;border-radius:6px}
+.add-product-icon{width:36px;height:36px;min-width:36px;padding:0!important;display:grid;place-items:center;font-size:20px;line-height:1;box-sizing:border-box}
+
+/* ============================================================
+   Report section
+   ============================================================ */
+.report-section{background:#123f39;color:#eff7ef;border-radius:14px;margin-top:42px;padding:26px}
+.report-section .eyebrow{color:#abc6b9}
+.report-section h2{font:600 26px Fraunces;margin:0}
+.report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:22px}
+.report-grid div{background:#24564f;padding:14px;border-radius:9px}
+.report-grid span{display:block;color:#bcd1c8;font-size:11px}
+.report-grid b{display:block;font:600 20px Fraunces;margin-top:5px}
+
+/* ============================================================
+   Search inputs
+   ============================================================ */
+.search-label{position:relative;max-width:330px;margin:0 0 12px;display:block}
+.search-label span{position:absolute;left:12px;top:11px;font-size:17px;color:#7a918b}
+.search-label input{margin:0;padding-left:34px}
+
+/* ============================================================
+   Mobile nav
+   ============================================================ */
+.mobile-nav{display:none}
+
+/* ============================================================
+   Dark mode — top-level palette
+   ============================================================ */
+:root[data-theme="dark"]{--ink:#e8f0ea;--muted:#9bb2aa;--cream:#14221f;--paper:#1d302b;--line:#355048;--teal:#69c2a5;--orange:#f2a66d;--blue:#9fc0e2;--green:#a9ce86}
+[data-theme="dark"] body{background:var(--cream);color:var(--ink)}
+[data-theme="dark"] input,[data-theme="dark"] select{background:#203a33;color:var(--ink);border-color:#45665b}
+[data-theme="dark"] .product-card,[data-theme="dark"] .inventory-empty,[data-theme="dark"] .muted-copy,[data-theme="dark"] .empty-state{background:var(--paper);border-color:var(--line)}
+[data-theme="dark"] .cloud-button{background:#203a33;color:#d8eee3;border-color:#45665b}
+[data-theme="dark"] dialog{background:#1d302b;color:var(--ink)}
+[data-theme="dark"] dialog label{color:#cde0d7}
+[data-theme="dark"] .avatar-editor,[data-theme="dark"] .cloud-status,[data-theme="dark"] .restock-product{background:#203a33}
+[data-theme="dark"] .secondary{background:#29473e;color:#d9ede4;border-color:#45665b}
+
+/* ============================================================
+   Dark mode — sections shown as light cards
+   ============================================================ */
+[data-theme="dark"] .hero,
+[data-theme="dark"] .stats article,
+[data-theme="dark"] .inventory-section,
+[data-theme="dark"] .orders-section,
+[data-theme="dark"] .customers-section,
+[data-theme="dark"] .report-section,
+[data-theme="dark"] .tip,
+[data-theme="dark"] .inventory-table,
+[data-theme="dark"] .customer-table,
+[data-theme="dark"] .inventory-table tr,
+[data-theme="dark"] .customer-table tr,
+[data-theme="dark"] .orders-section .table-wrap,
+[data-theme="dark"] .report-grid div{
+  background:#e3eee3;color:#123f39;
+}
+[data-theme="dark"] .hero h2,
+[data-theme="dark"] .section-heading h2,
+[data-theme="dark"] .customers-section h2,
+[data-theme="dark"] .report-section h2,
+[data-theme="dark"] .tip b,
+[data-theme="dark"] .stats article strong,
+[data-theme="dark"] .report-grid b,
+[data-theme="dark"] .inventory-table td,
+[data-theme="dark"] .customer-table td,
+[data-theme="dark"] .orders-section td,
+[data-theme="dark"] .orders-section td b{color:#123f39}
+[data-theme="dark"] .hero .eyebrow,
+[data-theme="dark"] .section-heading .eyebrow,
+[data-theme="dark"] .stats article p,
+[data-theme="dark"] .stats article small,
+[data-theme="dark"] .inventory-table small,
+[data-theme="dark"] .customer-table small,
+[data-theme="dark"] .orders-section small,
+[data-theme="dark"] .report-section .eyebrow,
+[data-theme="dark"] .report-grid span,
+[data-theme="dark"] .tip p{color:#39604d}
+
+/* Table headers */
+[data-theme="dark"] .inventory-table th,
+[data-theme="dark"] .customer-table th,
+[data-theme="dark"] .orders-section .table-wrap table th{
+  background:#d4e6db;color:#39604d;border-bottom-color:#c8ddd0;
+}
+[data-theme="dark"] .inventory-table,
+[data-theme="dark"] .customer-table{border-color:#b9d2c1}
+[data-theme="dark"] .inventory-table td,
+[data-theme="dark"] .customer-table td{border-color:#c8ddd0}
+
+/* Variant rows + parent rows in dark mode */
+[data-theme="dark"] .inventory-table tr.parent-row td{border-top:2px solid #b9d2c1}
+[data-theme="dark"] .inventory-table tr.variant-row{background:#f0f6ed}
+[data-theme="dark"] .inventory-table tr.variant-row td{border-top:1px dashed #c8ddd0}
+[data-theme="dark"] .variant-toggle{background:#b9d2c1;color:#123f39}
+
+/* Order row dividers + filters in dark mode */
+[data-theme="dark"] .orders-section tbody tr{border-top:3px solid #b9d2c1}
+[data-theme="dark"] .orders-section tbody tr:first-child{border-top:0}
+[data-theme="dark"] .orders-section .filters{background:#d4e6db}
+[data-theme="dark"] .orders-section .filters .filter{background:transparent;color:#123f39;border-color:transparent}
+[data-theme="dark"] .orders-section .filters .filter.active{background:#123f39;color:#fffdfa}
+[data-theme="dark"] .orders-section .filters .filter:hover{background:#b9d2c1;color:#123f39}
+
+/* Order line text */
+[data-theme="dark"] .order-line{color:#39604d}
+[data-theme="dark"] .order-line b{color:#123f39}
+[data-theme="dark"] .order-line .line-specs{color:#7a5a2c}
+[data-theme="dark"] .receipt-line{color:#39604d}
+[data-theme="dark"] .receipt-line b{color:#123f39}
+[data-theme="dark"] .receipt-line-specs{color:#7a5a2c}
+
+/* Search inputs inside light cards */
+[data-theme="dark"] .inventory-search input,
+[data-theme="dark"] .customers-section .customer-search input,
+[data-theme="dark"] .orders-section .search-label input{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] .inventory-search input::placeholder{color:#6f8a80}
+[data-theme="dark"] .inventory-search span,
+[data-theme="dark"] .customers-section .customer-search span{color:#39604d}
+
+/* Status pills in dark */
+[data-theme="dark"] .status-select.pending{background:#624b2d;color:#ffd89b}
+[data-theme="dark"] .status-select.paid,[data-theme="dark"] .status-select.delivered{background:#28533f;color:#c9f0d2}
+[data-theme="dark"] .status-select.preparing{background:#304d68;color:#d1e5ff}
+[data-theme="dark"] .mark-paid{background:#28533f;color:#c9f0d2}
+[data-theme="dark"] .receipt-button{background:#123f39;color:#fffdfa;border-color:#123f39}
+[data-theme="dark"] .receipt-button:hover{background:#24564f}
+
+/* ⋮ menus in dark */
+[data-theme="dark"] .inventory-table .action-menu summary{color:#123f39}
+[data-theme="dark"] .inventory-table .action-menu summary:hover{background:#b9d2c1;color:#0b2721}
+[data-theme="dark"] .inventory-table .action-menu>div{background:#e3eee3;border-color:#b9d2c1;box-shadow:0 16px 36px #0b272140}
+[data-theme="dark"] .inventory-table .action-menu button{color:#123f39}
+[data-theme="dark"] .inventory-table .action-menu button:hover{background:#c8ddd0;color:#123f39}
+[data-theme="dark"] .order-action-menu summary{color:#123f39}
+[data-theme="dark"] .order-action-menu summary:hover{background:#b9d2c1;color:#0b2721}
+[data-theme="dark"] .order-action-menu>div{background:#e3eee3;border-color:#b9d2c1;box-shadow:0 16px 36px #0b272140}
+[data-theme="dark"] .order-action-menu button{color:#123f39}
+[data-theme="dark"] .order-action-menu button:hover{background:#c8ddd0;color:#123f39}
+[data-theme="dark"] .orders-menu summary{color:#123f39}
+[data-theme="dark"] .orders-menu summary:hover{background:#b9d2c1;color:#0b2721}
+[data-theme="dark"] .orders-menu>div{background:#e3eee3;border-color:#b9d2c1}
+[data-theme="dark"] .orders-menu button{color:#8a3d28}
+[data-theme="dark"] .orders-menu button:hover{background:#f7d9cd}
+
+/* Dialogs in dark — light card */
+[data-theme="dark"] #confirmDialog .confirm-box{background:#e3eee3}
+[data-theme="dark"] #confirmDialog h2{color:#123f39}
+[data-theme="dark"] #confirmDialog p{color:#39604d}
+[data-theme="dark"] #confirmDialog .secondary{background:#d4e6db;color:#123f39}
+[data-theme="dark"] #confirmDialog .secondary:hover{background:#b9d2c1}
+[data-theme="dark"] #confirmDialog .danger-button{background:#b85e47;color:#fff}
+[data-theme="dark"] #confirmDialog .danger-button:hover{background:#984936}
+[data-theme="dark"] #confirmDialog .confirm-icon{background:#f7d9cd;color:#8a3d28}
+
+[data-theme="dark"] .info-box{background:#e3eee3}
+[data-theme="dark"] .info-box h2{color:#123f39}
+[data-theme="dark"] .info-box p{color:#39604d}
+[data-theme="dark"] .info-icon{background:#c8ddd0;color:#123f39}
+
+[data-theme="dark"] .welcome-box{background:#e3eee3}
+[data-theme="dark"] .welcome-box h2{color:#123f39}
+[data-theme="dark"] .welcome-box p{color:#39604d}
+[data-theme="dark"] .welcome-box .welcome-sub{color:#39604d}
+
+[data-theme="dark"] .tour-box{background:#e3eee3}
+[data-theme="dark"] .tour-box h2{color:#123f39}
+[data-theme="dark"] .tour-box p{color:#39604d}
+
+[data-theme="dark"] .reminder-box{background:#e3eee3}
+[data-theme="dark"] .reminder-box h2{color:#123f39}
+[data-theme="dark"] .reminder-box p{color:#39604d}
+[data-theme="dark"] .reminder-icon{background:#c8ddd0;color:#123f39}
+
+[data-theme="dark"] #cloudDialog{background:#e3eee3;color:#123f39}
+[data-theme="dark"] #cloudDialog h2,[data-theme="dark"] #cloudDialog label{color:#123f39}
+[data-theme="dark"] #cloudDialog .eyebrow{color:#39604d}
+[data-theme="dark"] #cloudDialog .cloud-status{background:#d4e6db;color:#39604d}
+[data-theme="dark"] #cloudDialog input{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] .cloud-dismiss-row .link-button{color:#39604d}
+[data-theme="dark"] .cloud-dismiss-row .link-button:hover{color:#123f39}
+[data-theme="dark"] .link-button{color:#69c2a5}
+
+[data-theme="dark"] #receiptDialog,[data-theme="dark"] #customerDialog{background:#e3eee3;color:#123f39}
+[data-theme="dark"] #receiptDialog h2,[data-theme="dark"] #receiptDialog p,[data-theme="dark"] #receiptDialog small,[data-theme="dark"] #customerDialog h2,[data-theme="dark"] #customerDialog label{color:#123f39}
+[data-theme="dark"] #receiptDialog .eyebrow,[data-theme="dark"] #customerDialog .eyebrow{color:#39604d}
+[data-theme="dark"] #receiptDialog .receipt-actions{background:#e3eee3}
+[data-theme="dark"] #customerDialog input,[data-theme="dark"] #customerDialog textarea,[data-theme="dark"] #customerDialog select{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] .receipt-variation{background:#c8ddd0;color:#123f39}
+[data-theme="dark"] .receipt-variation span{color:#39604d}
+
+[data-theme="dark"] #profileDialog{background:#e3eee3;color:#123f39}
+[data-theme="dark"] #profileDialog h2,[data-theme="dark"] #profileDialog label{color:#123f39}
+[data-theme="dark"] #profileDialog input{background:#f6fbf7;color:#123f39;border-color:#c8d8ce}
+[data-theme="dark"] #profileDialog .eyebrow{color:#39604d}
+[data-theme="dark"] #profileDialog .avatar-editor{background:#d4e6db}
+[data-theme="dark"] #profileDialog .avatar-editor p{color:#39604d}
+
+[data-theme="dark"] #orderDialog,[data-theme="dark"] #productDialog,[data-theme="dark"] #restockDialog{background:#e3eee3;color:#123f39}
+[data-theme="dark"] #orderDialog h2,[data-theme="dark"] #productDialog h2,[data-theme="dark"] #restockDialog h2,[data-theme="dark"] #orderDialog label,[data-theme="dark"] #productDialog label,[data-theme="dark"] #restockDialog label{color:#123f39}
+[data-theme="dark"] #orderDialog input,[data-theme="dark"] #orderDialog select,[data-theme="dark"] #productDialog input,[data-theme="dark"] #productDialog select,[data-theme="dark"] #restockDialog input{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] #orderDialog .eyebrow,[data-theme="dark"] #productDialog .eyebrow,[data-theme="dark"] #restockDialog .eyebrow{color:#39604d}
+[data-theme="dark"] #productDialog textarea,[data-theme="dark"] #orderDialog textarea{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] #orderDialog .order-combo-select{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] #productDialog .variant-edit-row input{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] .remove-variant{background:#f7d9cd;color:#8a3d28}
+[data-theme="dark"] .restock-variant-row{background:#f0f6ed;border-color:#c8ddd0}
+[data-theme="dark"] .restock-new-variant{border-color:#c8ddd0}
+[data-theme="dark"] .restock-variant-amount{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] .restock-section-label{color:#39604d}
+
+[data-theme="dark"] #settingsDialog{background:#e3eee3}
+[data-theme="dark"] #settingsDialog h2,[data-theme="dark"] #settingsDialog label{color:#123f39}
+[data-theme="dark"] #settingsDialog .settings-block{background:#d4e6db}
+[data-theme="dark"] #settingsDialog .settings-block p{color:#39604d}
+[data-theme="dark"] #settingsDialog .settings-block b{color:#123f39}
+[data-theme="dark"] .danger-settings{background:#f7e5df;border-color:#d89b89}
+[data-theme="dark"] .danger-settings b,[data-theme="dark"] .danger-settings p{color:#713b2e}
+
+/* Nudge banner in dark */
+[data-theme="dark"] .cloud-nudge-banner{background:#3a2a12;border-color:#5c4520;color:#f0d9b3}
+[data-theme="dark"] .cloud-nudge-banner .nudge-icon{color:#e8b16b}
+[data-theme="dark"] .cloud-nudge-banner .nudge-action{background:#c07b1f;color:#fff}
+[data-theme="dark"] .cloud-nudge-banner .nudge-dismiss{color:#e8b16b}
+
+/* Profile button */
+[data-theme="dark"] .profile{background:#9fbe86;color:#17382d}
+
+/* Topbar menu */
+[data-theme="dark"] .topbar-menu summary{background:#203a33;color:#d8eee3;border-color:#45665b}
+[data-theme="dark"] .topbar-menu>div{background:var(--paper);border-color:var(--line)}
+[data-theme="dark"] .topbar-menu button:hover{background:#29473e}
+
+/* ============================================================
+   Mobile — sidebar slides out, tables become cards
+   ============================================================ */
+@media(max-width:780px){
+  .sidebar{position:fixed;z-index:5;transform:translateX(-100%);transition:.2s;width:255px;height:100vh}
+  .sidebar.open{transform:none}
+  .menu-button{display:block;border:0;background:none;font-size:23px;color:var(--ink);margin-right:12px}
+  .topbar>div{margin-right:auto}
+  .app-shell main{padding:25px 20px}
+  .hero{margin-top:45px;display:block}
+  .hero h2{font-size:31px}
+  .hero .primary{margin-top:23px;width:100%}
+  .stats{grid-template-columns:1fr;gap:10px}
+  .stats article{padding:16px 18px}
+  .orders-section{margin-top:35px}
+  .section-heading{align-items:start;gap:15px;flex-wrap:wrap}
+  .filters{flex-wrap:wrap}
+  .table-wrap{overflow-x:auto}
+  .tip{margin-top:24px}
+  .report-grid{grid-template-columns:1fr}
+  .report-section{padding:20px}
+  .receipt{min-width:0}
+  .topbar-actions{gap:6px}
+  .cloud-button{padding:7px 9px}
+  .hero{margin-top:34px}
+  .inventory-tools{display:flex;grid-template-columns:none;flex-wrap:nowrap;gap:6px;width:100%}
+  .inventory-search{min-width:0;max-width:none}
+  .low-stock-control{font-size:10px;gap:3px}
+  .low-stock-control input{width:32px;height:32px}
+  .add-product-icon{width:34px;height:34px;min-width:34px}
+  .customer-tools{width:100%}
+  .customer-search{flex:1}
+  .customer-search input{width:100%}
+  .orders-search-row{flex-wrap:nowrap;gap:4px}
+  .orders-search-row .search-label{flex:1;max-width:none}
+  .inventory-menu,.customers-menu{flex:0 0 auto}
+  .empty-actions{width:100%}
+  .empty-actions button{width:100%}
+
+  table{min-width:0!important}
+  .inventory-table,.customer-table{border:0;background:transparent}
+  .inventory-table thead,.customer-table thead{display:none}
+  .inventory-table tbody,.customer-table tbody,.inventory-table tr,.customer-table tr{display:block}
+  .inventory-table tr,.customer-table tr{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:9px;padding:4px 0}
+  .inventory-table td,.customer-table td{display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px;padding:8px 12px;border:0;font-size:13px}
+  .inventory-table td::before,.customer-table td::before{content:attr(data-label);color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding-top:2px}
+  .inventory-table .row-actions,.customer-table .row-actions{display:flex;justify-content:flex-end;min-height:40px}
+  .inventory-table .row-actions::before,.customer-table .row-actions::before{content:''}
+  .customer-table .row-actions button{margin:0 0 0 6px}
+
+  .orders-section .table-wrap{overflow:visible}
+  .orders-section table,.orders-section thead,.orders-section tbody,.orders-section tr,.orders-section td{display:block}
+  .orders-section thead{display:none}
+  .orders-section tr{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;padding:7px 0}
+  .orders-section td{display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px;padding:7px 12px;border:0;min-height:30px}
+  .orders-section td::before{color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+  .orders-section td:nth-child(1)::before{content:'Customer'}
+  .orders-section td:nth-child(2)::before{content:'Order'}
+  .orders-section td:nth-child(3)::before{content:'Channel'}
+  .orders-section td:nth-child(4)::before{content:'Amount'}
+  .orders-section td:nth-child(5)::before{content:'Status'}
+  .orders-section td:nth-child(6)::before{content:''}
+  .orders-section td:last-child{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:5px}
+
+  .order-item-row{grid-template-columns:1fr 1fr;grid-auto-rows:auto}
+  .order-item-row .order-combo-select{grid-column:1 / -1}
+  .order-item-row .order-quantity,.order-item-row .order-unit-price{grid-column:auto}
+  .order-item-row .remove-order-item{grid-column:2;justify-self:end}
+  .order-item-row input{font-size:12px;padding:9px 7px}
+  .form-row{grid-template-columns:1fr}
+  .customer-list{display:block}
+
+  .variant-edit-row{grid-template-columns:minmax(0,1fr) 1fr;gap:6px}
+  .variant-edit-row .variant-name{grid-column:1 / -1}
+  .variant-edit-row .variant-price{grid-column:1}
+  .variant-edit-row .variant-stock{grid-column:2}
+  .variant-edit-row .remove-variant{grid-column:2;justify-self:end;width:26px;height:26px}
+
+  .restock-variant-row{grid-template-columns:minmax(0,1fr) 90px;gap:8px}
+}
+
+@media(max-width:520px){
+  .inventory-search{min-width:0}
+}
+
+/* Mobile bottom nav */
+@media(max-width:780px){
+  body{padding-bottom:70px}
+  .mobile-nav{position:fixed;left:12px;right:12px;bottom:12px;z-index:6;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:7px;background:#123f39;border:1px solid #24564f;border-radius:14px;box-shadow:0 10px 30px #12342d40}
+  .mobile-nav a{display:grid;justify-items:center;gap:2px;padding:6px 2px;border-radius:8px;color:#c5ddd2;text-decoration:none}
+  .mobile-nav a:hover,.mobile-nav a:focus{background:#24564f;color:#fff}
+  .mobile-nav span{font-size:17px;line-height:1}
+  .mobile-nav small{font-size:10px;font-weight:700}
+}
+
+/* ===== Restore rounded cards + menus (light mode only) ===== */
+:root:not([data-theme="dark"]) .hero,
+:root:not([data-theme="dark"]) .stats article,
+:root:not([data-theme="dark"]) .inventory-section,
+:root:not([data-theme="dark"]) .orders-section,
+:root:not([data-theme="dark"]) .customers-section,
+:root:not([data-theme="dark"]) .report-section,
+:root:not([data-theme="dark"]) .tip{
+  border-radius:14px;
+}
+:root:not([data-theme="dark"]) .inventory-section,
+:root:not([data-theme="dark"]) .orders-section,
+:root:not([data-theme="dark"]) .customers-section{
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:22px;
+}
+:root:not([data-theme="dark"]) .stats article{
+  background:var(--paper);
+  border:1px solid var(--line);
+}
+:root:not([data-theme="dark"]) .topbar-menu>div{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:6px;
+  box-shadow:0 12px 25px #18373524;
+}
+
+/* ===== Topbar ⋮ menu — match app card style in both modes ===== */
+.topbar-menu>div,
+[data-theme="dark"] .topbar-menu>div{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:8px;
+  box-shadow:0 14px 30px #18373533;
+  overflow:hidden;
+}
+.topbar-menu button,
+[data-theme="dark"] .topbar-menu button{
+  display:block;
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  padding:10px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  font:600 12px 'DM Sans';
+  white-space:nowrap;
+  text-align:left;
+  margin:0;
+}
+.topbar-menu button:hover,
+[data-theme="dark"] .topbar-menu button:hover{
+  background:#e5f1e7;
+  color:#28764b;
+}
+[data-theme="dark"] .topbar-menu button:hover{background:#29473e;color:#d8eee3}
+
+/* ===== Dark-mode Settings buttons — match site button style ===== */
+[data-theme="dark"] #settingsDialog .secondary,
+[data-theme="dark"] #settingsDialog .appearance-option,
+[data-theme="dark"] #settingsDialog .settings-cloud-actions button{
+  background:#123f39;
+  color:#fffdfa;
+  border:1px solid #24564f;
+  border-radius:9px;
+  padding:11px 14px;
+  font:600 13px 'DM Sans';
+}
+[data-theme="dark"] #settingsDialog .secondary:hover,
+[data-theme="dark"] #settingsDialog .appearance-option:hover,
+[data-theme="dark"] #settingsDialog .settings-cloud-actions button:hover{
+  background:#1b5248;
+  color:#fff;
+}
+[data-theme="dark"] #settingsDialog .appearance-option.active{
+  background:#e89960;
+  color:#173c37;
+  border-color:#e89960;
+  box-shadow:0 3px 10px #e8996055;
+}
+[data-theme="dark"] #settingsDialog .appearance-option.active:hover{
+  background:#f0a875;
+  color:#173c37;
+}
+
+/* ===== Hero / business pulse section — restore inner padding ===== */
+.hero,
+[data-theme="dark"] .hero{
+  padding:28px 32px;
+  border-radius:14px;
+}
+.hero>div:first-child{padding-right:16px}
+.hero .eyebrow{margin-left:0}
+.hero h2{margin-top:2px}
+.hero-copy{margin-top:14px}
+
+@media(max-width:780px){
+  .hero,
+  [data-theme="dark"] .hero{padding:22px 20px}
+}
+
+/* ===== Restore rounded corners + borders for all main sections ===== */
+.hero,
+.stats article,
+.inventory-section,
+.orders-section,
+.customers-section,
+.report-section,
+.tip{
+  border-radius:14px !important;
+}
+.stats article{
+  background:var(--paper);
+  border:1px solid var(--line);
+}
+.inventory-section,
+.orders-section,
+.customers-section{
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:22px;
+}
+.hero{
+  background:var(--paper);
+  border:1px solid var(--line);
+}
+
+/* Dark mode equivalents */
+[data-theme="dark"] .hero,
+[data-theme="dark"] .stats article,
+[data-theme="dark"] .inventory-section,
+[data-theme="dark"] .orders-section,
+[data-theme="dark"] .customers-section,
+[data-theme="dark"] .report-section,
+[data-theme="dark"] .tip{
+  border-radius:14px !important;
+}
+[data-theme="dark"] .inventory-section,
+[data-theme="dark"] .orders-section,
+[data-theme="dark"] .customers-section{
+  padding:22px;
+}
+
+/* ============================================================
+   FINAL FIXES — receipt button, insights dark mode,
+   settings hover, inventory ⋮ overflow, topbar chevron
+   ============================================================ */
+
+/* 1. Receipt button visible in dark mode */
+[data-theme="dark"] .receipt-button,
+[data-theme="dark"] .orders-section .receipt-button{
+  background:#123f39 !important;
+  color:#fffdfa !important;
+  border:1px solid #24564f !important;
+}
+[data-theme="dark"] .receipt-button:hover,
+[data-theme="dark"] .orders-section .receipt-button:hover{
+  background:#1b5248 !important;
+  color:#fff !important;
+}
+
+/* 2. Business insights cards in dark mode */
+[data-theme="dark"] .report-section{
+  background:#123f39;
+  color:#eff7ef;
+}
+[data-theme="dark"] .report-section h2,
+[data-theme="dark"] .report-grid b{
+  color:#fffdfa;
+}
+[data-theme="dark"] .report-section .eyebrow,
+[data-theme="dark"] .report-grid span{
+  color:#c5ddd2;
+}
+[data-theme="dark"] .report-grid div{
+  background:#1b5248;
+  border:1px solid #24564f;
+  border-radius:10px;
+}
+
+/* 3. Settings dialog — buttons highlight on hover */
+#settingsDialog .secondary,
+#settingsDialog .appearance-option,
+#settingsDialog .settings-cloud-actions button,
+#settingsDialog .danger-button{
+  transition:background .15s,color .15s,box-shadow .15s,transform .05s;
+}
+#settingsDialog .secondary:hover,
+#settingsDialog .appearance-option:hover,
+#settingsDialog .settings-cloud-actions button:hover{
+  background:#c9e0cd;
+  color:#0e5a44;
+  box-shadow:0 3px 10px #0a6d5c33;
+  transform:translateY(-1px);
+}
+#settingsDialog .danger-button:hover{
+  background:#984936;
+  box-shadow:0 3px 10px #b85e4740;
+}
+#settingsDialog .appearance-option.active:hover{
+  background:#f0a875;
+  color:#173c37;
+}
+[data-theme="dark"] #settingsDialog .secondary:hover,
+[data-theme="dark"] #settingsDialog .appearance-option:hover,
+[data-theme="dark"] #settingsDialog .settings-cloud-actions button:hover{
+  background:#1b5248;
+  color:#fffdfa;
+  box-shadow:0 3px 10px #00000040;
+}
+[data-theme="dark"] #settingsDialog .appearance-option.active:hover{
+  background:#f0a875;
+  color:#173c37;
+}
+[data-theme="dark"] #settingsDialog .danger-button:hover{
+  background:#a44c39;
+  color:#fff;
+}
+
+/* 4. Inventory ⋮ menu — no clipping, flip for last rows */
+.inventory-grid .table-wrap{overflow:visible !important}
+.inventory-table{overflow:visible !important}
+.inventory-table .action-menu[open]{z-index:200 !important}
+.inventory-table .action-menu[open] summary{background:#e5f1e7;color:#28764b}
+.inventory-table .action-menu>div{z-index:999 !important}
+.inventory-table tr:nth-last-child(-n+2) .action-menu>div,
+.inventory-table tr.variant-row:nth-last-child(-n+2) .action-menu>div{
+  top:auto !important;
+  bottom:38px !important;
+}
+[data-theme="dark"] .inventory-table .action-menu[open] summary{
+  background:#b9d2c1;color:#0b2721;
+}
+
+/* 5. Topbar ⋮ — hide the disclosure chevron */
+.topbar-menu summary{list-style:none}
+.topbar-menu summary::-webkit-details-marker{display:none}
+.topbar-menu summary::marker{content:''}
+.topbar-menu summary::-moz-list-bullet{list-style:none}
+
+/* ===== Topbar ⋮ menu — match the compact look of other ⋮ menus ===== */
+.topbar-menu>div{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:7px;
+  box-shadow:0 14px 30px #18373533;
+  min-width:150px;
+  display:grid;
+  gap:2px;
+}
+.topbar-menu button{
+  display:block;
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  padding:9px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font:600 12px 'DM Sans';
+  white-space:nowrap;
+  text-align:left;
+  margin:0;
+}
+.topbar-menu button:hover{
+  background:#e5f1e7;
+  color:#28764b;
+}
+
+/* Dark mode */
+[data-theme="dark"] .topbar-menu>div{
+  background:#e3eee3;
+  border-color:#b9d2c1;
+}
+[data-theme="dark"] .topbar-menu button{
+  color:#123f39;
+}
+[data-theme="dark"] .topbar-menu button:hover{
+  background:#c8ddd0;
+  color:#0b2721;
+}
+
+/* ===== Topbar ⋮ — cursor + positioning polish ===== */
+
+/* Pointer cursor on the ⋮ in every menu */
+.topbar-menu summary,
+.topbar-menu summary::marker,
+.topbar-menu summary *,
+.action-menu summary,
+.action-menu summary *,
+.order-action-menu summary,
+.order-action-menu summary *,
+.orders-menu summary,
+.orders-menu summary *{
+  cursor:pointer;
+}
+
+/* Topbar menu positioning */
+.topbar-menu{position:relative}
+.topbar-menu>div{
+  position:absolute;
+  top:calc(100% + 8px);
+  right:0;
+  left:auto;
+  min-width:150px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:7px;
+  box-shadow:0 14px 30px #18373533;
+  display:grid;
+  gap:2px;
+  z-index:20;
+}
+[data-theme="dark"] .topbar-menu>div{
+  background:#e3eee3;
+  border-color:#b9d2c1;
+}
+
+/* ============================================================
+   Hover highlights + search bar polish + datalist input
+   ============================================================ */
+
+/* .secondary buttons */
+.secondary{transition:background .15s,color .15s,box-shadow .15s,transform .05s}
+.secondary:hover{background:#c9e0cd;color:#0e5a44;box-shadow:0 3px 10px #0a6d5c25;transform:translateY(-1px)}
+.secondary:active{transform:translateY(0);box-shadow:0 1px 4px #0a6d5c25}
+[data-theme="dark"] .secondary:hover{background:#1b5248;color:#fffdfa;box-shadow:0 3px 10px #00000040}
+
+/* Customer table Edit / Remove */
+.edit-customer,.remove-customer{transition:background .15s,color .15s,box-shadow .15s,transform .05s}
+.edit-customer:hover{background:#c9e0cd;color:#0b4a36;box-shadow:0 3px 10px #0a6d5c25;transform:translateY(-1px)}
+.remove-customer:hover{background:#f2d4c9;color:#8a3d28;box-shadow:0 3px 10px #b85e4725;transform:translateY(-1px)}
+
+/* Row menu items */
+.action-menu button,.order-action-menu button{transition:background .12s,color .12s}
+
+/* Search bars */
+.inventory-search input,
+.customer-search input,
+.search-label input{transition:background .15s,border-color .15s,box-shadow .15s}
+.inventory-search input:hover,
+.customer-search input:hover,
+.search-label input:hover{background:#fbfdfa;border-color:#c9d8d0}
+.inventory-search input:focus,
+.customer-search input:focus,
+.search-label input:focus{background:#fff;border-color:transparent;box-shadow:0 0 0 3px #91c5b955}
+
+/* Search bars in dark */
+[data-theme="dark"] .inventory-search input:hover,
+[data-theme="dark"] .customer-search input:hover,
+[data-theme="dark"] .search-label input:hover{background:#fff;border-color:#c8ddd0}
+[data-theme="dark"] .inventory-search input:focus,
+[data-theme="dark"] .customer-search input:focus,
+[data-theme="dark"] .search-label input:focus{background:#fff;box-shadow:0 0 0 3px #69c2a555}
+
+/* Add product + button */
+.add-product-icon{transition:background .15s,color .15s,box-shadow .15s,transform .05s}
+.add-product-icon:hover{background:#c9e0cd;color:#0e5a44;box-shadow:0 3px 10px #0a6d5c25;transform:translateY(-1px)}
+[data-theme="dark"] .add-product-icon:hover{background:#1b5248;color:#fffdfa}
+
+/* Customer input (datalist) */
+input[list="customerOptions"]{
+  background:#fff;border:1px solid #d9ded6;border-radius:7px;padding:11px;
+  font:14px 'DM Sans';transition:background .15s,border-color .15s,box-shadow .15s;
+}
+input[list="customerOptions"]:hover{background:#fbfdfa;border-color:#c9d8d0}
+input[list="customerOptions"]:focus{background:#fff;border-color:transparent;box-shadow:0 0 0 3px #91c5b955}
+[data-theme="dark"] input[list="customerOptions"]{background:#f6fbf7;color:#123f39;border-color:#b9d2c1}
+[data-theme="dark"] input[list="customerOptions"]:focus{box-shadow:0 0 0 3px #69c2a555}
+
+/* ============================================================
+   Custom customer autocomplete (styled like the product dropdown)
+   ============================================================ */
+.autocomplete-wrap{position:relative}
+.autocomplete-list{
+  position:absolute;
+  top:calc(100% + 4px);
+  left:0;
+  right:0;
+  z-index:50;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:10px;
+  box-shadow:0 16px 36px #1837352e;
+  max-height:240px;
+  overflow-y:auto;
+  padding:6px;
+  font:14px 'DM Sans';
+}
+.autocomplete-list[hidden]{display:none}
+
+.autocomplete-list .ac-group{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  color:#7e938e;
+  padding:8px 10px 4px;
+}
+
+.autocomplete-list .ac-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  font:500 14px 'DM Sans';
+  padding:9px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.autocomplete-list .ac-option:hover,
+.autocomplete-list .ac-option.active{
+  background:#e5f1e7;
+  color:#166453;
+}
+.autocomplete-list .ac-empty{
+  color:var(--muted);
+  padding:10px 12px;
+  font-size:13px;
+}
+
+/* Dark mode */
+[data-theme="dark"] .autocomplete-list{
+  background:#e3eee3;
+  border-color:#b9d2c1;
+  box-shadow:0 16px 36px #0b272140;
+}
+[data-theme="dark"] .autocomplete-list .ac-group{color:#39604d}
+[data-theme="dark"] .autocomplete-list .ac-option{color:#123f39}
+[data-theme="dark"] .autocomplete-list .ac-option:hover,
+[data-theme="dark"] .autocomplete-list .ac-option.active{
+  background:#c8ddd0;
+  color:#0b2721;
+}
+[data-theme="dark"] .autocomplete-list .ac-empty{color:#39604d}
+
+/* ===== Consistent inner padding for main sections ===== */
+.inventory-section,
+.orders-section,
+.customers-section{
+  padding:22px 24px;
+}
+
+.inventory-grid .table-wrap,
+.orders-section .table-wrap,
+.customers-section .table-wrap{
+  margin-top:4px;
+}
+
+.inventory-section .section-heading,
+.orders-section .section-heading,
+.customers-section .section-heading{
+  margin-bottom:18px;
+}
+
+.orders-search-row{margin-bottom:14px}
+.inventory-tools{margin-bottom:6px}
+
+@media(max-width:780px){
+  .inventory-section,
+  .orders-section,
+  .customers-section{padding:18px 16px}
+}
+
+/* ===== Price + unit side by side in Add product ===== */
+.price-per-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+  margin-top:6px;
+}
+.price-per-row input{margin:0}
+.price-per-row select{
+  margin:0;
+  width:auto;
+  min-width:110px;
+  padding:0 12px;
+}
+[data-theme="dark"] #productDialog .price-per-row select{
+  background:#f6fbf7;
+  color:#123f39;
+  border-color:#b9d2c1;
+}
+
+/* ===== Fix: rows bleeding past the rounded corners ===== */
+.inventory-section .table-wrap,
+.orders-section .table-wrap,
+.customers-section .table-wrap{
+  overflow:hidden;
+  border-radius:11px;
+}
+
+/* Don't let the first row's top border draw across the rounded corners */
+.inventory-table tbody tr:first-child td,
+.orders-section tbody tr:first-child td,
+.customer-table tbody tr:first-child td{
+  border-top:0;
+}
+
+/* Same for the last row's bottom border, so it hugs the rounded bottom */
+.inventory-table tbody tr:last-child td,
+.orders-section tbody tr:last-child td,
+.customer-table tbody tr:last-child td{
+  border-bottom:0;
+}
+
+/* Parent rows inside the inventory shouldn't force a top border on row 1 */
+.inventory-table tr.parent-row:first-child td{
+  border-top:0;
+}
+
+/* Keep row separators looking intentional a touch inside the edges */
+.inventory-table td:first-child,
+.customer-table td:first-child,
+.orders-section td:first-child{
+  border-top-left-radius:0;
+  border-top-right-radius:0;
+}
+
+/* Reinstate the divider between rows, but only BETWEEN rows */
+.inventory-table tbody tr + tr td,
+.customer-table tbody tr + tr td{
+  border-top:1px solid var(--line);
+}
+
+/* For the inventory, preserve the 2px top divider on parent rows
+   (unless it's the first row of the table) */
+.inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid var(--line);
+}
+
+@media(max-width:780px){
+  .inventory-section .table-wrap,
+  .orders-section .table-wrap,
+  .customers-section .table-wrap{
+    overflow:visible;
+    border-radius:0;
+    background:transparent;
+    border:0;
+  }
+}
+
+/* ===== Inventory — kill the square "chin" on the top row ===== */
+.inventory-section .table-wrap{
+  overflow:hidden !important;
+  border-radius:12px !important;
+  border:1px solid var(--line);
+}
+
+/* The very first row in the inventory — no borders at all */
+.inventory-table tbody tr:first-child td{
+  border-top:0 !important;
+}
+
+/* If that first row is a parent row, kill its 2px border too */
+.inventory-table tbody tr.parent-row:first-child td{
+  border-top:0 !important;
+}
+
+/* If it's a variant row that happens to be first, same treatment */
+.inventory-table tbody tr.variant-row:first-child td{
+  border-top:0 !important;
+}
+
+/* Also kill the border on the top-row's first and last cells, so nothing
+   paints into the corner radius */
+.inventory-table tbody tr:first-child td:first-child,
+.inventory-table tbody tr:first-child td:last-child{
+  border-top-left-radius:12px;
+  border-top-right-radius:12px;
+  border-top:0 !important;
+}
+
+/* Same idea for the last row */
+.inventory-table tbody tr:last-child td:first-child,
+.inventory-table tbody tr:last-child td:last-child{
+  border-bottom-left-radius:12px;
+  border-bottom-right-radius:12px;
+}
+
+/* Between-row dividers for parent rows stay visible below the first */
+.inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid var(--line);
+}
+
+/* Between-row dashed divider for variant rows stays */
+.inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #dfe6da;
+}
+
+/* Dark-mode line colour */
+[data-theme="dark"] .inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid #b9d2c1;
+}
+[data-theme="dark"] .inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #c8ddd0;
+}
+
+/* Mobile — cards take over, no wrapper clipping needed */
+@media(max-width:780px){
+  .inventory-section .table-wrap{
+    overflow:visible !important;
+    border:0 !important;
+    border-radius:0 !important;
+    background:transparent !important;
+  }
+  .inventory-table tbody tr:first-child td:first-child,
+  .inventory-table tbody tr:first-child td:last-child{
+    border-radius:0;
+  }
+}
+
+/* ============================================================
+   Fix: rounded corners WITHOUT clipping the ⋮ menus
+   ============================================================ */
+
+/* Wrapper — no overflow:hidden, no clipping */
+.inventory-section .table-wrap,
+.orders-section .table-wrap,
+.customers-section .table-wrap{
+  overflow:visible !important;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:var(--paper);
+}
+
+/* The table itself keeps its own radius */
+.inventory-table,
+.orders-section .table-wrap table,
+.customer-table{
+  border-radius:12px;
+  overflow:visible;
+}
+
+/* Only the FIRST row's corner cells get rounded — this is what
+   makes the corners look clean without clipping anything */
+.inventory-table tbody tr:first-child td:first-child,
+.orders-section tbody tr:first-child td:first-child,
+.customer-table tbody tr:first-child td:first-child{
+  border-top-left-radius:11px;
+}
+.inventory-table tbody tr:first-child td:last-child,
+.orders-section tbody tr:first-child td:last-child,
+.customer-table tbody tr:first-child td:last-child{
+  border-top-right-radius:11px;
+}
+.inventory-table tbody tr:last-child td:first-child,
+.orders-section tbody tr:last-child td:first-child,
+.customer-table tbody tr:last-child td:first-child{
+  border-bottom-left-radius:11px;
+}
+.inventory-table tbody tr:last-child td:last-child,
+.orders-section tbody tr:last-child td:last-child,
+.customer-table tbody tr:last-child td:last-child{
+  border-bottom-right-radius:11px;
+}
+
+/* The top of the very first row must not have a border that paints
+   into the corner */
+.inventory-table tbody tr:first-child td,
+.orders-section tbody tr:first-child td,
+.customer-table tbody tr:first-child td{
+  border-top:0;
+}
+
+/* Between-row dividers stay */
+.inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid var(--line);
+}
+.inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #dfe6da;
+}
+[data-theme="dark"] .inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid #b9d2c1;
+}
+[data-theme="dark"] .inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #c8ddd0;
+}
+
+/* Reinstate the ⋮ menu float + flip */
+.inventory-table .action-menu[open]{z-index:200 !important}
+.inventory-table .action-menu[open] summary{background:#e5f1e7;color:#28764b}
+.inventory-table .action-menu>div{z-index:999 !important}
+.inventory-table tr:nth-last-child(-n+2) .action-menu>div,
+.inventory-table tr.variant-row:nth-last-child(-n+2) .action-menu>div{
+  top:auto !important;
+  bottom:38px !important;
+}
+
+.orders-section .order-action-menu[open]{z-index:200 !important}
+.orders-section .order-action-menu[open] summary{background:#e5f1e7;color:#28764b}
+.orders-section .order-action-menu>div{z-index:999 !important}
+.orders-section tbody tr:nth-last-child(-n+2) .order-action-menu>div,
+.orders-section tbody tr:last-child .order-action-menu>div{
+  top:auto !important;
+  bottom:38px !important;
+}
+
+/* Dark-mode highlight for open menus */
+[data-theme="dark"] .inventory-table .action-menu[open] summary,
+[data-theme="dark"] .orders-section .order-action-menu[open] summary{
+  background:#b9d2c1;color:#0b2721;
+}
+
+/* Mobile — cards take over; the ⋮ menus sit as popovers, no clipping */
+@media(max-width:780px){
+  .inventory-section .table-wrap,
+  .orders-section .table-wrap,
+  .customers-section .table-wrap{
+    overflow:visible !important;
+    border:0;
+    background:transparent;
+    border-radius:0;
+  }
+  .inventory-table tbody tr:first-child td:first-child,
+  .inventory-table tbody tr:last-child td:last-child,
+  .orders-section tbody tr:first-child td:first-child,
+  .orders-section tbody tr:last-child td:last-child,
+  .customer-table tbody tr:first-child td:first-child,
+  .customer-table tbody tr:last-child td:last-child{
+    border-radius:0;
+  }
+}
+
+/* ============================================================
+   Rounded corners WITHOUT killing the ⋮ menus
+   ============================================================ */
+
+.inventory-section .table-wrap,
+.orders-section .table-wrap,
+.customers-section .table-wrap{
+  overflow:clip;
+  overflow-clip-margin:60px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--paper);
+}
+
+.inventory-table,
+.orders-section .table-wrap table,
+.customer-table{
+  border-radius:11px;
+}
+
+.inventory-table tbody tr:first-child td,
+.orders-section tbody tr:first-child td,
+.customer-table tbody tr:first-child td{
+  border-top:0;
+}
+
+.inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid var(--line);
+}
+.inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #dfe6da;
+}
+[data-theme="dark"] .inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid #b9d2c1;
+}
+[data-theme="dark"] .inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #c8ddd0;
+}
+
+.inventory-table .action-menu[open]{z-index:200}
+.inventory-table .action-menu[open] summary{background:#e5f1e7;color:#28764b}
+.inventory-table .action-menu>div{z-index:999}
+.inventory-table tr:nth-last-child(-n+2) .action-menu>div,
+.inventory-table tr.variant-row:nth-last-child(-n+2) .action-menu>div{
+  top:auto;bottom:38px;
+}
+
+.orders-section .order-action-menu[open]{z-index:200}
+.orders-section .order-action-menu[open] summary{background:#e5f1e7;color:#28764b}
+.orders-section .order-action-menu>div{z-index:999}
+.orders-section tbody tr:nth-last-child(-n+2) .order-action-menu>div,
+.orders-section tbody tr:last-child .order-action-menu>div{
+  top:auto;bottom:38px;
+}
+
+/* ============================================================
+   Round the outer corner cells so nothing pokes past the curve
+   ============================================================ */
+
+/* First row: top corners */
+.inventory-table tbody tr:first-child td:first-child,
+.orders-section tbody tr:first-child td:first-child,
+.customer-table tbody tr:first-child td:first-child{
+  border-top-left-radius:11px;
+}
+.inventory-table tbody tr:first-child td:last-child,
+.orders-section tbody tr:first-child td:last-child,
+.customer-table tbody tr:first-child td:last-child{
+  border-top-right-radius:11px;
+}
+
+/* Last row: bottom corners */
+.inventory-table tbody tr:last-child td:first-child,
+.orders-section tbody tr:last-child td:first-child,
+.customer-table tbody tr:last-child td:first-child{
+  border-bottom-left-radius:11px;
+}
+.inventory-table tbody tr:last-child td:last-child,
+.orders-section tbody tr:last-child td:last-child,
+.customer-table tbody tr:last-child td:last-child{
+  border-bottom-right-radius:11px;
+}
+
+/* Also round the header row's outer cells, if you have one visible */
+.inventory-table thead tr:first-child th:first-child,
+.orders-section thead tr:first-child th:first-child,
+.customer-table thead tr:first-child th:first-child{
+  border-top-left-radius:11px;
+}
+.inventory-table thead tr:first-child th:last-child,
+.orders-section thead tr:first-child th:last-child,
+.customer-table thead tr:first-child th:last-child{
+  border-top-right-radius:11px;
+}
+
+/* If the header has a background colour, its rounded corners must match */
+.inventory-table thead th,
+.orders-section .table-wrap thead th,
+.customer-table thead th{
+  background-clip:padding-box;
+}
+
+/* Mobile: revert to card layout, no corner rounding needed */
+@media(max-width:780px){
+  .inventory-table tbody tr:first-child td,
+  .inventory-table tbody tr:last-child td,
+  .orders-section tbody tr:first-child td,
+  .orders-section tbody tr:last-child td,
+  .customer-table tbody tr:first-child td,
+  .customer-table tbody tr:last-child td{
+    border-radius:10px;
+  }
+}
+
+/* ============================================================
+   FINAL: rounded table cards for inventory / orders / customers
+   Corners handled on the table itself. ⋮ menus open upward.
+   ============================================================ */
+
+/* 1. Wrapper is now just a container — no border, no radius, no bg */
+.inventory-section .table-wrap,
+.orders-section .table-wrap,
+.customers-section .table-wrap{
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  overflow:visible !important;
+  padding:0;
+}
+
+/* 2. The table itself is the rounded card */
+.inventory-table,
+.orders-section .table-wrap > table,
+.customer-table{
+  width:100%;
+  border-collapse:separate !important;
+  border-spacing:0 !important;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--paper);
+}
+
+/* 3. TOP corners — header cells (if there's a thead) */
+.inventory-table thead tr:first-child th:first-child,
+.orders-section .table-wrap > table thead tr:first-child th:first-child,
+.customer-table thead tr:first-child th:first-child{
+  border-top-left-radius:11px;
+}
+.inventory-table thead tr:first-child th:last-child,
+.orders-section .table-wrap > table thead tr:first-child th:last-child,
+.customer-table thead tr:first-child th:last-child{
+  border-top-right-radius:11px;
+}
+
+/* 3b. If a table has NO header row visible, round the first body row instead */
+.inventory-table tbody tr:first-child td:first-child,
+.orders-section .table-wrap > table tbody tr:first-child td:first-child,
+.customer-table tbody tr:first-child td:first-child{
+  border-top-left-radius:11px;
+}
+.inventory-table tbody tr:first-child td:last-child,
+.orders-section .table-wrap > table tbody tr:first-child td:last-child,
+.customer-table tbody tr:first-child td:last-child{
+  border-top-right-radius:11px;
+}
+
+/* 4. BOTTOM corners — last body row's outer cells */
+.inventory-table tbody tr:last-child td:first-child,
+.orders-section .table-wrap > table tbody tr:last-child td:first-child,
+.customer-table tbody tr:last-child td:first-child{
+  border-bottom-left-radius:11px;
+}
+.inventory-table tbody tr:last-child td:last-child,
+.orders-section .table-wrap > table tbody tr:last-child td:last-child,
+.customer-table tbody tr:last-child td:last-child{
+  border-bottom-right-radius:11px;
+}
+
+/* 5. Kill the first body row's top border — header draws its own bottom */
+.inventory-table tbody tr:first-child td,
+.orders-section .table-wrap > table tbody tr:first-child td,
+.customer-table tbody tr:first-child td{
+  border-top:0;
+}
+
+/* 6. Row dividers between rows (kept) */
+.inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid var(--line);
+}
+.inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #dfe6da;
+}
+[data-theme="dark"] .inventory-table tbody tr.parent-row:not(:first-child) td{
+  border-top:2px solid #b9d2c1;
+}
+[data-theme="dark"] .inventory-table tbody tr.variant-row td{
+  border-top:1px dashed #c8ddd0;
+}
+
+/* 7. Dark-mode table body */
+[data-theme="dark"] .inventory-table,
+[data-theme="dark"] .orders-section .table-wrap > table,
+[data-theme="dark"] .customer-table{
+  background:#e3eee3;
+  border-color:#b9d2c1;
+}
+
+/* 8. ⋮ menus — always open upward, inside the table's clipped box */
+.inventory-table .action-menu>div,
+.orders-section .order-action-menu>div{
+  top:auto !important;
+  bottom:38px !important;
+  right:0 !important;
+  z-index:999 !important;
+}
+.inventory-table .action-menu[open],
+.orders-section .order-action-menu[open]{
+  z-index:500 !important;
+}
+.inventory-table .action-menu[open] summary,
+.orders-section .order-action-menu[open] summary{
+  background:#e5f1e7;
+  color:#28764b;
+}
+[data-theme="dark"] .inventory-table .action-menu[open] summary,
+[data-theme="dark"] .orders-section .order-action-menu[open] summary{
+  background:#b9d2c1;
+  color:#0b2721;
+}
+
+/* 9. Mobile: cards take over, no wrapper box */
+@media(max-width:780px){
+  .inventory-section .table-wrap,
+  .orders-section .table-wrap,
+  .customers-section .table-wrap{
+    border:0 !important;
+    border-radius:0 !important;
+    background:transparent !important;
+  }
+  .inventory-table,
+  .orders-section .table-wrap > table,
+  .customer-table{
+    border:0;
+    border-radius:0;
+    overflow:visible;
+    background:transparent;
+  }
+  .inventory-table tbody tr:first-child td:first-child,
+  .inventory-table tbody tr:first-child td:last-child,
+  .inventory-table tbody tr:last-child td:first-child,
+  .inventory-table tbody tr:last-child td:last-child,
+  .orders-section .table-wrap > table tbody tr:first-child td:first-child,
+  .orders-section .table-wrap > table tbody tr:first-child td:last-child,
+  .orders-section .table-wrap > table tbody tr:last-child td:first-child,
+  .orders-section .table-wrap > table tbody tr:last-child td:last-child,
+  .customer-table tbody tr:first-child td:first-child,
+  .customer-table tbody tr:first-child td:last-child,
+  .customer-table tbody tr:last-child td:first-child,
+  .customer-table tbody tr:last-child td:last-child{
+    border-radius:0 !important;
+  }
+}
+
+/* ============================================================
+   Inventory: bottom corners — target the true last row, any type
+   ============================================================ */
+
+/* The last tr in the inventory body, regardless of class */
+.inventory-table > tbody > tr:last-child > td:first-child{
+  border-bottom-left-radius:12px !important;
+}
+.inventory-table > tbody > tr:last-child > td:last-child{
+  border-bottom-right-radius:12px !important;
+}
+
+/* Also if the table happens to have a tfoot or another wrapper */
+.inventory-table > tbody > tr:last-child > td{
+  border-bottom:0 !important;
+}
+
+/* Make sure the parent row directly before the last row doesn't push a border into the corner */
+.inventory-table > tbody > tr:last-child > td:first-child,
+.inventory-table > tbody > tr:last-child > td:last-child{
+  overflow:hidden;
+}
+
+/* Force the table's own bottom radius to match */
+.inventory-table{
+  border-bottom-left-radius:12px !important;
+  border-bottom-right-radius:12px !important;
+  overflow:hidden !important;
+}
+
+/* If a variant row is the last, its cells must clip their corners */
+.inventory-table > tbody > tr.variant-row:last-child > td:first-child{
+  border-bottom-left-radius:12px !important;
+}
+.inventory-table > tbody > tr.variant-row:last-child > td:last-child{
+  border-bottom-right-radius:12px !important;
+}
+
+/* Same for a parent row that happens to be last */
+.inventory-table > tbody > tr.parent-row:last-child > td:first-child{
+  border-bottom-left-radius:12px !important;
+}
+.inventory-table > tbody > tr.parent-row:last-child > td:last-child{
+  border-bottom-right-radius:12px !important;
+}
+
+/* Solid background on the corner cells so the curve is visible */
+.inventory-table > tbody > tr:last-child > td:first-child,
+.inventory-table > tbody > tr:last-child > td:last-child{
+  background:var(--paper);
+}
+[data-theme="dark"] .inventory-table > tbody > tr:last-child > td:first-child,
+[data-theme="dark"] .inventory-table > tbody > tr:last-child > td:last-child{
+  background:#e3eee3;
+}

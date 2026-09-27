@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b6b5c" />
+  <title>Biashara Bridge | Small business order tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">B</span><span>biashara<br><b>bridge</b></span></a>
+      <nav>
+        <button class="nav-link active back-dashboard" type="button"><span>←</span> Back to dashboard</button>
+        <a class="nav-link" href="#orders"><span>▤</span> Orders <em id="orderBadge">0</em></a>
+        <a class="nav-link" href="#inventory"><span>▦</span> Stock</a>
+        <a class="nav-link" href="#customers"><span>♙</span> Customers</a>
+        <a class="nav-link" href="#reports"><span>↗</span> Reports</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="help-card"><b>Need a hand?</b><p>Keep your orders in one place and follow up faster.</p></div><small>Made for Kenyan biashara</small></div>
+    </aside>
+
+    <main>
+      <div class="cloud-nudge-banner" id="cloudNudgeBanner" hidden>
+        <span class="nudge-icon">☁</span>
+        <span class="nudge-text">Your data is saved on this device only. Sign in to back it up to the cloud and sync across devices.</span>
+        <button type="button" class="nudge-action" id="nudgeSignIn">Sign in</button>
+        <button type="button" class="nudge-dismiss" id="nudgeDismiss" aria-label="Dismiss">×</button>
+      </div>
+
+      <header class="topbar">
+        <button class="menu-button" aria-label="Open menu">☰</button>
+        <div><p class="eyebrow" id="topbarDate">TODAY</p><h1 id="topbarGreeting">Good morning</h1></div>
+        <div class="topbar-actions"><button class="cloud-button" id="cloudButton" type="button">Cloud sync</button><details class="topbar-menu"><summary aria-label="More options">⋮</summary><div><button id="settingsButton" type="button">Settings</button><button id="tourButton" type="button">Take a tour</button></div></details><button class="profile" id="profileButton" aria-label="Open business profile"><img id="profileImage" hidden alt="" /><span id="profileInitials">·</span></button></div>
+      </header>
+
+      <section class="hero" id="dashboard">
+        <div><p class="eyebrow">YOUR BUSINESS PULSE</p><h2>Every order. Every customer.<br><i>Nothing slips through.</i></h2><p class="hero-copy">A calm place to manage the orders coming from WhatsApp, Instagram and your shop.</p></div>
+        <button class="primary add-order">+ Add new order</button>
+      </section>
+
+      <section class="stats" aria-label="Business summary">
+        <article><span class="stat-icon orange">↗</span><p>Sales this month</p><strong id="salesStat">KSh 0</strong><small id="salesNote">Add your first order</small></article>
+        <article><span class="stat-icon blue">▤</span><p>Open orders</p><strong id="openStat">0</strong><small id="openNote">No orders yet</small></article>
+        <article><span class="stat-icon green">♙</span><p>Customers</p><strong id="customerStat">0</strong><small id="customerNote">Start building your list</small></article>
+      </section>
+
+      <section class="inventory-section" id="inventory">
+        <div class="section-heading"><div><p class="eyebrow">STOCK ROOM</p><h2>Inventory</h2></div><div class="inventory-tools"><label class="inventory-search"><span>⌕</span><input id="inventorySearch" type="search" placeholder="Search stock" aria-label="Search inventory" /></label><button class="secondary add-product-icon" id="addProduct" type="button" aria-label="Add product" title="Add product">+</button><label class="low-stock-control" title="Low-stock alert threshold">Low stock <input id="lowStockLimit" type="number" min="0" value="3" aria-label="Low-stock alert threshold" /></label><details class="orders-menu inventory-menu"><summary aria-label="Stock options">⋮</summary><div><button id="clearInventoryButton" type="button">Clear all stock</button></div></details></div></div>
+        <div class="inventory-grid" id="inventoryGrid"></div>
+      </section>
+
+      <section class="orders-section" id="orders">
+        <div class="section-heading"><div><p class="eyebrow">ORDER DESK</p><h2>Recent orders</h2></div><div class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="pending">Pending</button><button class="filter" data-filter="paid">Paid</button></div></div>
+        <div class="orders-search-row">
+          <label class="search-label"><span>⌕</span><input id="orderSearch" type="search" placeholder="Search customer, item, or channel" aria-label="Search orders" /></label>
+          <details class="orders-menu">
+            <summary aria-label="Order options">⋮</summary>
+            <div>
+              <button id="clearOrdersButton" type="button">Clear all orders</button>
+            </div>
+          </details>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Customer</th><th>Order / date sold</th><th>Channel</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody id="ordersBody"></tbody></table><div id="emptyState" class="empty-state"><div>✦</div><h3>Your order desk is ready</h3><p>Add an order, or load example data to see how it works.</p><div class="empty-actions"><button class="secondary add-order">Add your first order</button><button class="secondary" id="demoBtn" type="button">Load example data</button></div></div></div>
+      </section>
+
+      <section class="customers-section" id="customers"><div class="section-heading"><div><p class="eyebrow">YOUR COMMUNITY</p><h2>Customers</h2></div><div class="customer-tools"><label class="customer-search"><span>⌕</span><input id="customerSearch" type="search" placeholder="Search customers" aria-label="Search customers" /></label><button class="secondary" id="addCustomer">+ Add customer</button><details class="orders-menu customers-menu"><summary aria-label="Customer options">⋮</summary><div><button id="clearCustomersButton" type="button">Clear all customers</button></div></details></div></div><div class="customer-list" id="customerList"></div></section>
+      <section class="report-section" id="reports"><p class="eyebrow">BUSINESS INSIGHTS</p><h2>This month at a glance</h2><div class="report-grid"><div><span>Best channel</span><b id="bestChannel">—</b></div><div><span>Paid sales</span><b id="paidSales">KSh 0</b></div><div><span>Outstanding payments</span><b id="outstanding">KSh 0</b></div></div></section>
+      <section class="tip"><span>✦</span><div><b>Simple habit, stronger biashara.</b><p>When an order is delivered, mark it complete and save the customer. Your repeat customers are your best marketing.</p></div></section>
+    </main>
+    <nav class="mobile-nav" aria-label="Main navigation"><a href="#orders"><span>▤</span><small>Orders</small></a><a href="#inventory"><span>▦</span><small>Stock</small></a><a href="#customers"><span>♙</span><small>Customers</small></a><a href="#reports"><span>↗</span><small>Reports</small></a></nav>
+  </div>
+
+  <!-- Order dialog -->
+  <dialog id="orderDialog">
+    <form id="orderForm">
+      <div class="modal-title"><div><p class="eyebrow">NEW SALE</p><h2 id="orderDialogTitle">Add an order</h2></div><button class="close" type="button" aria-label="Close">×</button></div>
+      <label>Customer name
+  <div class="autocomplete-wrap">
+    <input name="customer" id="customerInput" autocomplete="off" required placeholder="e.g. Wanjiku N." />
+    <div class="autocomplete-list" id="customerAutocomplete" hidden></div>
+  </div>
+</label>
+      <div class="order-items-heading"><label>What did they order?</label><button class="secondary compact" id="addOrderItem" type="button">+ Add another item</button></div>
+      <div id="orderItems">
+        <div class="order-item-row">
+          <select class="order-combo-select" required aria-label="Choose product and spec">
+            <option value="">— Choose a product —</option>
+          </select>
+          <input class="order-quantity" name="quantity" type="number" min="1" value="1" required aria-label="Quantity" />
+          <input class="order-unit-price" name="unitPrice" type="number" min="1" required placeholder="Unit price" aria-label="Unit price" />
+          <button class="remove-order-item" type="button" aria-label="Remove item">×</button>
+        </div>
+      </div>
+      <div class="form-row"><label>Total amount (KSh)<input id="orderAmount" name="amount" type="number" min="1" readonly required placeholder="Calculated automatically" /></label><label>Where did it come from?<select name="channel"><option>WhatsApp</option><option>Instagram</option><option>Walk-in</option><option>Facebook</option><option>Referral</option></select></label></div>
+
+      <div class="form-row">
+        <label>Payment method
+          <select name="paymentMethod" id="paymentMethodSelect">
+            <option>M-Pesa</option>
+            <option>Cash</option>
+            <option>Bank transfer</option>
+            <option>Card</option>
+            <option>Airtel Money</option>
+            <option value="__other__">Other…</option>
+          </select>
+        </label>
+        <label id="paymentReferenceLabel">Payment reference (optional)
+          <input name="mpesa" id="paymentReferenceInput" placeholder="e.g. QHJ7K2L9M" />
+        </label>
+      </div>
+      <label id="paymentOtherLabel" hidden>Type of payment
+        <input name="paymentOther" id="paymentOtherInput" data-case="sentence" placeholder="e.g. Crypto, Cheque, Trade credit" />
+      </label>
+
+      <label>Customer note or delivery preference<input name="notes" data-case="sentence" placeholder="e.g. Deliver to CBD on Friday" /></label>
+      <label>Date sold<input id="saleDate" name="saleDate" type="date" required /></label>
+      <div class="form-row"><label>Order stage<select name="status"><option value="pending">Pending payment</option><option value="paid">Paid</option><option value="preparing">Preparing</option><option value="delivered">Delivered</option></select></label><label>Phone (optional)<input name="phone" type="tel" placeholder="07xx xxx xxx" /></label></div>
+      <button class="primary submit" value="default">Save order</button>
+    </form>
+  </dialog>
+
+  <!-- Product dialog -->
+  <dialog id="productDialog">
+    <form id="productForm">
+      <div class="modal-title"><div><p class="eyebrow">STOCK ROOM</p><h2 id="productDialogTitle">Add a product</h2></div><button class="close-product close" type="button" aria-label="Close">×</button></div>
+      <label>Product name<input id="productNameInput" name="productName" data-case="title" required placeholder="e.g. LED Bulb" /></label>
+      <div class="form-row"><label>Business category<select id="productCategoryInput" name="category"><option>Clothing & fashion</option><option>Food & drinks</option><option>Beauty & personal care</option><option>Electronics & accessories</option><option>Home & décor</option><option>Services</option><option>Other</option></select></label><label>Base stock code (optional)<input id="productSkuInput" name="sku" data-case="sku" placeholder="e.g. LED-B" /></label></div>
+<div class="form-row">
+  <label>Default selling price
+    <div class="price-per-row">
+      <input id="productPriceInput" name="price" type="number" min="0" placeholder="0" />
+      <select id="productUnitInput" name="unit" aria-label="Price per">
+        <option value="piece">per piece</option>
+        <option value="box">per box</option>
+        <option value="pack">per pack</option>
+        <option value="kg">per kg</option>
+        <option value="g">per gram</option>
+        <option value="litre">per litre</option>
+        <option value="ml">per ml</option>
+        <option value="metre">per metre</option>
+        <option value="hour">per hour</option>
+        <option value="day">per day</option>
+        <option value="session">per session</option>
+      </select>
+    </div>
+  </label>
+  <label id="productStockField">Quantity in stock<input id="productStockInput" name="stock" type="number" min="0" placeholder="0" readonly /></label>
+</div>      <div id="variantSection">
+        <div class="order-items-heading" style="margin-top:16px"><label>Specs / variants (each can have its own price and stock)</label><button class="secondary compact" id="addVariant" type="button">+ Add spec</button></div>
+        <div id="variantRows"></div>
+        <p class="variant-hint">If you add specs, the total stock above is the sum of their individual stocks.</p>
+      </div>
+      <button class="primary submit" type="submit">Save product</button>
+    </form>
+  </dialog>
+
+  <!-- Restock dialog -->
+  <dialog id="restockDialog">
+    <form id="restockForm">
+      <div class="modal-title"><div><p class="eyebrow">STOCK REFILL</p><h2>Restock product</h2></div><button class="close-restock close" type="button" aria-label="Close">×</button></div>
+      <div class="restock-product"><b id="restockProductName">Product</b><small id="restockCurrentStock">Current stock: 0</small></div>
+
+      <div id="restockVariantsSection">
+        <p class="restock-section-label">Add units to existing specs</p>
+        <div id="restockVariantRows"></div>
+      </div>
+
+      <div id="restockNoVariantsSection" hidden>
+        <label>How many new units arrived?<input id="restockAmountSimple" type="number" min="1" placeholder="e.g. 12" /></label>
+      </div>
+
+      <details class="restock-new-variant">
+        <summary>+ Add a new spec / variant</summary>
+        <div class="restock-new-variant-inner">
+          <label>Spec name (e.g. 9W warm)<input id="newVariantName" data-case="title" placeholder="Spec name" /></label>
+          <div class="form-row">
+            <label>Price (KSh)<input id="newVariantPrice" type="number" min="0" placeholder="e.g. 250" /></label>
+            <label>Quantity<input id="newVariantStock" type="number" min="0" placeholder="e.g. 12" /></label>
+          </div>
+        </div>
+      </details>
+
+      <label>Refill note (optional)<input name="restockNote" data-case="sentence" placeholder="e.g. New supplier delivery" /></label>
+      <button class="primary submit" type="submit">Update stock</button>
+    </form>
+  </dialog>
+
+  <!-- Customer dialog -->
+  <dialog id="customerDialog"><form id="customerForm" method="dialog"><div class="modal-title"><div><p class="eyebrow">YOUR COMMUNITY</p><h2 id="customerDialogTitle">Add a customer</h2></div><button class="close-customer close" type="button" aria-label="Close">×</button></div><label>Customer name<input id="customerNameInput" name="customerName" data-case="title" required placeholder="e.g. Brian Otieno" /></label><div class="form-row"><label>Phone number<input id="customerPhoneInput" name="customerPhone" type="tel" placeholder="07xx xxx xxx" /></label><label>Email (optional)<input id="customerEmailInput" name="customerEmail" type="email" placeholder="name@email.com" /></label></div><label>Area / delivery location<input id="customerAreaInput" name="customerArea" data-case="sentence" placeholder="e.g. Nairobi CBD" /></label><label>Customer notes<input id="customerNotesInput" name="customerNotes" data-case="sentence" placeholder="e.g. Prefers WhatsApp messages" /></label><button class="primary submit" value="default">Save customer</button></form></dialog>
+
+  <!-- Receipt dialog -->
+  <dialog id="receiptDialog"><div class="receipt" id="receiptContent"></div><div class="receipt-actions"><button class="secondary" id="closeReceipt">Close</button><button class="primary" id="printReceipt">Print receipt</button></div></dialog>
+
+  <!-- Profile dialog -->
+  <dialog id="profileDialog">
+    <form id="profileForm" method="dialog">
+      <div class="modal-title"><div><p class="eyebrow">YOUR BUSINESS</p><h2>Business profile</h2></div><button class="close-profile close" type="button" aria-label="Close">×</button></div>
+      <div class="avatar-editor"><label class="avatar-upload" title="Choose a profile picture"><img id="profilePreview" hidden alt="Business profile preview" /><span id="avatarFallback">AM</span><input id="avatarInput" type="file" accept="image/*" /></label><div><b>Add your business look</b><p>Choose a logo or picture. It stays on this device.</p></div></div>
+      <label>Business name<input id="businessNameInput" name="businessName" data-case="title" required placeholder="e.g. Amani Styles" /></label>
+      <div class="form-row"><label>Your name<input id="ownerNameInput" name="ownerName" data-case="title" required placeholder="e.g. Amani M." /></label><label>Business phone<input id="businessPhoneInput" name="businessPhone" type="tel" placeholder="07xx xxx xxx" /></label></div>
+      <button class="primary submit" value="default">Save profile</button>
+    </form>
+  </dialog>
+
+  <!-- Cloud dialog -->
+  <dialog id="cloudDialog">
+    <form id="cloudForm" method="dialog">
+      <div class="modal-title"><div><p class="eyebrow">CLOUD SYNC</p><h2 id="cloudDialogTitle">Sign in to sync</h2></div><button class="close-cloud close" type="button" aria-label="Close">×</button></div>
+      <div class="auth-alert" id="cloudAlert" hidden role="alert"><span class="auth-alert-icon">⚠</span><div><b>ERROR</b><p id="cloudAlertMessage"></p></div></div>
+      <p class="cloud-status" id="cloudStatus">Your current data is saved only in this browser. Sign in to sync across devices — or just close this window to keep using the app locally.</p>
+
+      <div id="loginStep">
+        <label>Email address<input id="cloudEmail" type="email" required placeholder="you@example.com" /></label>
+        <label>Password<input id="cloudPassword" type="password" required minlength="6" placeholder="At least 6 characters" /></label>
+        <p class="forgot-password-row"><button type="button" class="link-button" id="forgotPasswordLink">Forgot password?</button></p>
+        <div class="cloud-actions"><button class="secondary" id="cloudSignUp" type="button">Create account</button><button class="primary submit" id="cloudSignIn" type="submit">Sign in</button></div>
+        <p class="cloud-dismiss-row"><button type="button" class="link-button" id="dismissCloud">Continue without signing in</button></p>
+      </div>
+
+      <div id="requestCodeStep" hidden>
+        <p class="step-copy">Enter your registered email and we'll send a code to reset your password.</p>
+        <label>Registered email<input id="resetEmail" type="email" required placeholder="you@example.com" /></label>
+        <div class="cloud-actions"><button class="secondary" id="backToLoginFromRequest" type="button">Back to sign in</button><button class="primary" id="sendResetCode" type="button">Send code</button></div>
+      </div>
+
+      <div id="verifyCodeStep" hidden>
+        <p class="step-copy">Enter the code sent to <b id="resetEmailDisplay"></b> and choose a new password.</p>
+        <label>Code from your email<input id="resetCode" inputmode="numeric" autocomplete="one-time-code" required placeholder="e.g. 123456" /></label>
+        <label>New password<input id="resetNewPassword" type="password" required minlength="6" placeholder="At least 6 characters" /></label>
+        <label>Confirm new password<input id="resetConfirmPassword" type="password" required minlength="6" placeholder="Re-enter new password" /></label>
+        <div class="cloud-actions"><button class="secondary" id="backToLoginFromVerify" type="button">Back to sign in</button><button class="primary" id="confirmResetPassword" type="button">Reset password</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Confirm dialog -->
+  <dialog id="confirmDialog">
+    <div class="confirm-box">
+      <div class="confirm-icon">⚠</div>
+      <h2 id="confirmTitle">Are you sure?</h2>
+      <p id="confirmMessage"></p>
+      <div class="confirm-actions"><button class="secondary" id="confirmCancel" type="button">Cancel</button><button class="danger-button" id="confirmProceed" type="button">Yes, continue</button></div>
+    </div>
+  </dialog>
+
+  <!-- Info dialog -->
+  <dialog id="infoDialog">
+    <div class="info-box">
+      <div class="info-icon" id="infoIcon">✓</div>
+      <h2 id="infoTitle">Done</h2>
+      <p id="infoMessage"></p>
+      <div class="info-actions"><button class="primary" id="infoOk" type="button">OK</button></div>
+    </div>
+  </dialog>
+
+  <!-- Settings dialog -->
+  <dialog id="settingsDialog">
+    <form id="settingsForm" method="dialog">
+      <div class="modal-title"><div><p class="eyebrow">WORKSPACE</p><h2>Settings</h2></div><button class="close-settings close" type="button" aria-label="Close">×</button></div>
+      <div class="settings-block"><b>Appearance</b><p>Choose how Biashara Bridge looks on this device.</p><div class="appearance-options"><button class="secondary appearance-option" data-theme-choice="light" type="button">Light</button><button class="secondary appearance-option" data-theme-choice="dark" type="button">Dark</button><button class="secondary appearance-option" data-theme-choice="system" type="button">System</button></div></div>
+
+      <div class="settings-block cloud-settings">
+        <b>Cloud account</b>
+        <p id="settingsCloudStatus" aria-live="polite">You're not signed in. Sign in to back up your data to the cloud and sync across devices.</p>
+        <div class="settings-cloud-actions">
+          <button class="secondary" id="settingsSignIn" type="button">Sign in</button>
+          <button class="secondary" id="settingsSignOut" type="button" hidden>Log out</button>
+        </div>
+      </div>
+
+      <div class="settings-block danger-settings"><b>Start afresh</b><p>Remove all customers, inventory, and orders from this business. Your account, profile, and appearance settings will stay.</p><button class="danger-button" id="resetBusinessData" type="button">Reset business data</button></div>
+    </form>
+  </dialog>
+
+  <!-- Welcome dialog -->
+  <dialog id="welcomeDialog">
+    <div class="welcome-box">
+      <p class="eyebrow">WELCOME</p>
+      <h2>Biashara Bridge</h2>
+      <p>Every order. Every customer. Nothing slips through.</p>
+      <p class="welcome-sub">Would you like a quick tour, or jump straight in?</p>
+      <div class="welcome-actions">
+        <button class="primary" id="welcomeTour" type="button">Take the tour</button>
+        <button class="secondary" id="welcomeSkip" type="button">Skip — I'll explore</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Tour dialog -->
+  <dialog id="tourDialog">
+    <div class="tour-box">
+      <p class="eyebrow" id="tourStepLabel">STEP 1 OF 4</p>
+      <h2 id="tourTitle">Inventory</h2>
+      <p id="tourBody">Add your products and stock here. Products can have multiple specs (sizes, colours, wattage...), each with its own price and stock.</p>
+      <div class="tour-actions">
+        <button class="secondary" id="tourSkip" type="button">Skip</button>
+        <button class="primary" id="tourNext" type="button">Next</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Sign-in reminder dialog -->
+  <dialog id="signInReminderDialog">
+    <div class="reminder-box">
+      <div class="reminder-icon">☁</div>
+      <h2>Back up your data?</h2>
+      <p>You have local data saved on this device. Sign in to back it up to the cloud and sync across devices.</p>
+      <div class="reminder-actions">
+        <button class="primary" id="reminderSignIn" type="button">Sign in</button>
+        <button class="secondary" id="reminderLater" type="button">Not now</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="cloud-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
