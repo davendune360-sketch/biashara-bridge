@@ -9,7 +9,23 @@ It provides a simple workspace for managing orders coming from channels such as 
 ## Live Project
 
 **Biashara Bridge:** https://biasharabridge.netlify.app/
+## Screenshots
 
+### Dashboard
+
+![Biashara Bridge Dashboard](screenshots/dashboard.png)
+
+### Order Management
+
+![Biashara Bridge Orders](screenshots/orders.png)
+
+### Products & Stock
+
+![Biashara Bridge Products](screenshots/products.png)
+
+### Customer Management
+
+![Biashara Bridge Customers](screenshots/customers.png)
 ## Features
 
 ### Order Management
