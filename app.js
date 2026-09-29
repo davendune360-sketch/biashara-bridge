@@ -1846,3 +1846,54 @@ document.addEventListener('focusin', e => {
     if (!input.contains(e.target) && !list.contains(e.target)) close();
   });
 })();
+
+// ============================================================
+// Mobile sidebar: backdrop, tap-to-close, toggle
+// ============================================================
+(function wireMobileSidebar(){
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.querySelector('#sidebarBackdrop');
+  const toggle = document.querySelector('.menu-button');
+  if (!sidebar || !backdrop || !toggle) return;
+
+  function openSidebar(){
+    sidebar.classList.add('open');
+    backdrop.hidden = false;
+    // Trigger the fade-in on the next frame
+    requestAnimationFrame(() => backdrop.classList.add('visible'));
+  }
+  function closeSidebar(){
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('visible');
+    // Hide after the transition finishes
+    setTimeout(() => {
+      if (!sidebar.classList.contains('open')) backdrop.hidden = true;
+    }, 220);
+  }
+
+  // Toggle on ☰
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (sidebar.classList.contains('open')) closeSidebar();
+    else openSidebar();
+  });
+
+  // Tap backdrop to close
+  backdrop.addEventListener('click', closeSidebar);
+
+  // Close when any nav link inside the sidebar is clicked
+  sidebar.querySelectorAll('.nav-link, .back-dashboard').forEach(el => {
+    el.addEventListener('click', () => closeSidebar());
+  });
+
+  // Close if the window is resized past mobile width
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 780 && sidebar.classList.contains('open')) closeSidebar();
+  });
+})();
+
+// ============================================================
+// Make floating + sidebar Add-order buttons work
+// (the existing .add-order listener already runs, since
+//  we use the same class — nothing more needed)
+// ============================================================

@@ -16,6 +16,7 @@
       <a class="brand" href="#"><span class="brand-mark">B</span><span>biashara<br><b>bridge</b></span></a>
       <nav>
         <button class="nav-link active back-dashboard" type="button"><span>←</span> Back to dashboard</button>
+        <a class="nav-link add-order" href="#"><span>＋</span> Add new order</a>
         <a class="nav-link" href="#orders"><span>▤</span> Orders <em id="orderBadge">0</em></a>
         <a class="nav-link" href="#inventory"><span>▦</span> Stock</a>
         <a class="nav-link" href="#customers"><span>♙</span> Customers</a>
@@ -73,6 +74,12 @@
       <section class="tip"><span>✦</span><div><b>Simple habit, stronger biashara.</b><p>When an order is delivered, mark it complete and save the customer. Your repeat customers are your best marketing.</p></div></section>
     </main>
     <nav class="mobile-nav" aria-label="Main navigation"><a href="#orders"><span>▤</span><small>Orders</small></a><a href="#inventory"><span>▦</span><small>Stock</small></a><a href="#customers"><span>♙</span><small>Customers</small></a><a href="#reports"><span>↗</span><small>Reports</small></a></nav>
+
+    <!-- Backdrop that closes the sidebar on tap (mobile only) -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
+
+    <!-- Floating add-order button (mobile only) -->
+    <button class="floating-add-order add-order" type="button" aria-label="Add order">+</button>
   </div>
 
   <!-- Order dialog -->
@@ -321,4 +328,5 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
 </body>
+</html>
 </html>

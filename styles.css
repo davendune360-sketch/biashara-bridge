@@ -1834,3 +1834,67 @@ input[list="customerOptions"]:focus{background:#fff;border-color:transparent;box
 [data-theme="dark"] .inventory-table > tbody > tr:last-child > td:last-child{
   background:#e3eee3;
 }
+
+/* ============================================================
+   Mobile: floating add-order + tappable backdrop to close sidebar
+   ============================================================ */
+
+/* Floating add-order button — mobile only */
+.floating-add-order{
+  display:none;
+}
+@media(max-width:780px){
+  .floating-add-order{
+    display:grid;
+    place-items:center;
+    position:fixed;
+    right:16px;
+    bottom:88px;               /* sits above the mobile nav bar */
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:var(--teal);
+    color:#fff;
+    font-size:28px;
+    line-height:1;
+    padding:0;
+    border:0;
+    box-shadow:0 8px 24px #0a6d5c55, 0 2px 6px #00000030;
+    cursor:pointer;
+    z-index:40;
+    transition:transform .12s, background .15s;
+  }
+  .floating-add-order:active{
+    transform:scale(.94);
+    background:#075447;
+  }
+  [data-theme="dark"] .floating-add-order{
+    background:#69c2a5;
+    color:#0b2721;
+    box-shadow:0 8px 24px #00000060;
+  }
+  [data-theme="dark"] .floating-add-order:active{
+    background:#4ba17d;
+  }
+}
+
+/* Backdrop that dims content when sidebar is open */
+.sidebar-backdrop{
+  position:fixed;
+  inset:0;
+  background:#0b272199;
+  z-index:4;             /* sits below the sidebar (z-index 5) */
+  opacity:0;
+  transition:opacity .2s;
+}
+.sidebar-backdrop.visible{
+  opacity:1;
+}
+[data-theme="dark"] .sidebar-backdrop{
+  background:#00000080;
+}
+
+/* Hide the backdrop on desktop */
+@media(min-width:781px){
+  .sidebar-backdrop{display:none!important}
+}
