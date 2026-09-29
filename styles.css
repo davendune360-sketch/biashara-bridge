@@ -1260,3 +1260,358 @@ input:focus,select:focus{outline:2px solid #91c5b9;border-color:transparent}
   justify-content:flex-start;
   text-align:left;
 }
+
+/* ============================================================
+   Force rounded corners on ALL three sections + their tables
+   (inventory · recent orders · customers)
+   ============================================================ */
+
+.inventory-section,
+.orders-section,
+.customers-section{
+  border-radius:16px !important;
+  overflow:hidden !important;      /* clip children at the curve */
+  background:var(--paper);
+  border:1px solid var(--line);
+}
+
+.inventory-grid .table-wrap,
+.orders-section .table-wrap,
+.customers-section .table-wrap{
+  border-radius:14px !important;
+  overflow:visible;                 /* let ⋮ menus escape */
+  background:transparent;
+  border:0;
+}
+
+.inventory-table,
+.orders-section .table-wrap table,
+.customer-table{
+  border-radius:14px !important;
+  border:1px solid var(--line);
+  background:var(--paper);
+  border-collapse:separate !important;
+  border-spacing:0 !important;
+  overflow:hidden;
+}
+
+/* Header corner cells */
+.inventory-table thead tr:first-child th:first-child,
+.orders-section .table-wrap thead tr:first-child th:first-child,
+.customer-table thead tr:first-child th:first-child{
+  border-top-left-radius:13px !important;
+}
+.inventory-table thead tr:first-child th:last-child,
+.orders-section .table-wrap thead tr:first-child th:last-child,
+.customer-table thead tr:first-child th:last-child{
+  border-top-right-radius:13px !important;
+}
+
+/* Bottom-left/right of the final row */
+.inventory-table tbody tr:last-child td:first-child,
+.orders-section .table-wrap tbody tr:last-child td:first-child,
+.customer-table tbody tr:last-child td:first-child{
+  border-bottom-left-radius:13px !important;
+}
+.inventory-table tbody tr:last-child td:last-child,
+.orders-section .table-wrap tbody tr:last-child td:last-child,
+.customer-table tbody tr:last-child td:last-child{
+  border-bottom-right-radius:13px !important;
+}
+
+/* Remove any top border that paints over the corner */
+.inventory-table tbody tr:first-child td,
+.orders-section .table-wrap tbody tr:first-child td,
+.customer-table tbody tr:first-child td{
+  border-top:0 !important;
+}
+
+/* Make sure the ⋮ menus still escape the section box */
+.inventory-table .action-menu>div,
+.orders-section .order-action-menu>div{
+  z-index:9999 !important;
+}
+
+/* Dark mode */
+[data-theme="dark"] .inventory-section,
+[data-theme="dark"] .orders-section,
+[data-theme="dark"] .customers-section{
+  background:#e3eee3;
+  border-color:#b9d2c1;
+}
+[data-theme="dark"] .inventory-table,
+[data-theme="dark"] .orders-section .table-wrap table,
+[data-theme="dark"] .customer-table{
+  background:#e3eee3;
+  border-color:#b9d2c1;
+}
+
+/* ============================================================
+   Fix: inner padding so text sits clear of the rounded corners
+   ============================================================ */
+
+.inventory-section,
+.orders-section,
+.customers-section{
+  padding:22px 24px 24px !important;   /* extra top + side breathing room */
+}
+
+/* Eyebrow + heading should also stay clear of the curve */
+.inventory-section .section-heading,
+.orders-section .section-heading,
+.customers-section .section-heading{
+  margin-top:4px;
+  padding-top:0;
+}
+
+/* The "Add a customer here..." message needs left padding too */
+.muted-copy,
+.inventory-empty{
+  margin:0 4px;
+  padding:18px 20px;
+}
+
+/* Same for empty-state */
+.empty-state{
+  padding:36px 20px 40px;
+}
+
+@media(max-width:780px){
+  .inventory-section,
+  .orders-section,
+  .customers-section{
+    padding:18px 16px 20px !important;
+  }
+}
+
+/* ============================================================
+   Fix: more top padding for eyebrow + let ⋮ menus escape
+   ============================================================ */
+
+/* More top padding so "STOCK ROOM" / "ORDER DESK" / "YOUR COMMUNITY"
+   sits well clear of the rounded top edge */
+.inventory-section,
+.orders-section,
+.customers-section{
+  padding:28px 24px 24px !important;
+}
+
+/* The ⋮ menus MUST escape the section — clip only the top area,
+   not the full box. We do this by moving the section's clip to a
+   pseudo-element that only rounds the top corners visually. */
+.inventory-section,
+.orders-section,
+.customers-section{
+  overflow:visible !important;   /* let children escape */
+}
+
+/* But wrap the top rounded edge with a border-radius that matches
+   the section's background — so the top corners stay smooth
+   without clipping the dropdowns */
+.inventory-section::before,
+.orders-section::before,
+.customers-section::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  pointer-events:none;
+  border:1px solid var(--line);
+  background:transparent;
+}
+
+/* Sections need position:relative for the pseudo-element to sit right */
+.inventory-section,
+.orders-section,
+.customers-section{
+  position:relative;
+}
+
+/* ⋮ dropdowns must float above the pseudo-element */
+.inventory-table .action-menu>div,
+.orders-section .order-action-menu>div,
+.orders-menu>div{
+  z-index:9999 !important;
+}
+
+/* The ⋮ on section headings also has to escape */
+.section-heading .orders-menu{
+  position:relative;
+  z-index:200;
+}
+
+/* Dark mode border for the pseudo-element */
+[data-theme="dark"] .inventory-section::before,
+[data-theme="dark"] .orders-section::before,
+[data-theme="dark"] .customers-section::before{
+  border-color:#b9d2c1;
+}
+
+/* Keep the interior padding aligned on mobile */
+@media(max-width:780px){
+  .inventory-section,
+  .orders-section,
+  .customers-section{
+    padding:22px 16px 20px !important;
+  }
+}
+
+/* ============================================================
+   Desktop: sidebar sticks to the viewport
+   (does NOT scroll with the page, and its content stays put)
+   ============================================================ */
+@media(min-width:781px){
+  .sidebar{
+    position:sticky;
+    top:0;
+    align-self:flex-start;   /* needed for sticky to work inside flex parent */
+    height:100vh;            /* fill the viewport */
+    overflow-y:auto;         /* allow scrolling only inside the sidebar if its content is long */
+    /* keep the smooth open/close animation */
+    transition:margin-left .25s ease;
+  }
+  .sidebar.is-hidden{
+    margin-left:-246px;
+  }
+
+  /* Hide the sidebar's own scrollbar so it looks clean */
+  .sidebar::-webkit-scrollbar{width:6px}
+  .sidebar::-webkit-scrollbar-track{background:transparent}
+  .sidebar::-webkit-scrollbar-thumb{background:#24564d;border-radius:3px}
+}
+
+/* ============================================================
+   Sidebar: keep content packed at the top — no gap-pushing
+   ============================================================ */
+@media(min-width:781px){
+  .sidebar{
+    /* Keep the sidebar full height, but let the content flow naturally */
+    height:100vh;
+    justify-content:flex-start;
+  }
+
+  /* Remove the "push to bottom" behaviour on sidebar-bottom */
+  .sidebar .sidebar-bottom{
+    margin-top:24px;   /* was margin-top:auto — now it just sits below the nav */
+  }
+
+  /* The help card no longer needs to visually dominate */
+  .sidebar .help-card{
+    margin-top:0;
+  }
+}
+
+/* ============================================================
+   Desktop sidebar: tall internal scroll + subtle hint
+   ============================================================ */
+@media(min-width:781px){
+  .sidebar{
+    position:sticky;
+    top:0;
+    align-self:flex-start;
+    height:100vh;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    justify-content:flex-start;
+  }
+
+  /* The tall gap — this is the "scrolling feel" */
+  .sidebar .sidebar-bottom{
+    margin-top:160px;
+  }
+
+  /* Prevent flex auto-margin from interfering */
+  .sidebar > *{
+    flex:0 0 auto;
+  }
+
+  /* Slim, subtle scrollbar */
+  .sidebar::-webkit-scrollbar{width:6px}
+  .sidebar::-webkit-scrollbar-track{background:transparent}
+  .sidebar::-webkit-scrollbar-thumb{background:#24564d;border-radius:3px}
+  .sidebar::-webkit-scrollbar-thumb:hover{background:#3a6d61}
+
+  /* Firefox scrollbar */
+  .sidebar{scrollbar-width:thin;scrollbar-color:#24564d transparent}
+
+  /* Small "↓ more below" hint at the end of the nav */
+  .sidebar nav::after{
+    content:'↓ more below';
+    display:block;
+    margin-top:60px;
+    color:#7fa197;
+    font-size:10px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    text-align:center;
+    opacity:.5;
+    pointer-events:none;
+  }
+}
+
+/* ============================================================
+   Mobile sidebar: the gap doesn't need to be as big on a drawer
+   ============================================================ */
+@media(max-width:780px){
+  .sidebar .sidebar-bottom{
+    margin-top:24px;
+  }
+  .sidebar nav::after{
+    display:none;
+  }
+}
+
+/* ============================================================
+   Desktop sidebar: scroll-synced with the page (proportional)
+   - Only active on desktop
+   - Only while the sidebar is visible (not .is-hidden)
+   - Halts when the sidebar's own scroll is exhausted
+   ============================================================ */
+@media(min-width:781px){
+  .sidebar{
+    position:sticky;
+    top:0;
+    align-self:flex-start;
+    height:100vh;
+    overflow-y:auto;
+    overscroll-behavior:contain;      /* don't chain scroll into page */
+    justify-content:flex-start;
+  }
+
+  /* Tall gap so there's a real scroll range inside the sidebar */
+  .sidebar .sidebar-bottom{
+    margin-top:220px;
+  }
+
+  /* Prevent flex auto-margin from interfering */
+  .sidebar > *{
+    flex:0 0 auto;
+  }
+
+  /* Slim scrollbar — visible while it scrolls */
+  .sidebar::-webkit-scrollbar{width:6px}
+  .sidebar::-webkit-scrollbar-track{background:transparent}
+  .sidebar::-webkit-scrollbar-thumb{background:#24564d;border-radius:3px}
+  .sidebar::-webkit-scrollbar-thumb:hover{background:#3a6d61}
+  .sidebar{scrollbar-width:thin;scrollbar-color:#24564d transparent}
+
+  /* Optional hint that there's more below */
+  .sidebar nav::after{
+    content:'↓ more below';
+    display:block;
+    margin-top:60px;
+    color:#7fa197;
+    font-size:10px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
+    text-align:center;
+    opacity:.5;
+    pointer-events:none;
+  }
+}
+
+/* Mobile: no sync — drawer stays simple */
+@media(max-width:780px){
+  .sidebar .sidebar-bottom{margin-top:24px}
+  .sidebar nav::after{display:none}
+}
