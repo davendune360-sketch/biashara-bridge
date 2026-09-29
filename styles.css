@@ -952,3 +952,311 @@ input:focus,select:focus{outline:2px solid #91c5b9;border-color:transparent}
 [data-theme="dark"] .orders-section .customer-cell small{
   color:#39604d !important;
 }
+
+/* ============================================================
+   Mobile: fit content, no bottom-nav overlap
+   ============================================================ */
+@media(max-width:780px){
+  /* More bottom space so the last section isn't hidden behind the nav */
+  body{padding-bottom:96px}
+
+  /* Main content padding, tighter on mobile */
+  .app-shell main{padding:22px 16px 30px}
+
+  /* Sections have a bit less internal padding */
+  .hero,
+  .inventory-section,
+  .orders-section,
+  .customers-section,
+  .report-section,
+  .tip{padding:18px 16px}
+
+  /* Hero heading fits the screen */
+  .hero h2{font-size:26px;line-height:1.15}
+  .hero-copy{font-size:13px}
+
+  /* Section headings stack nicely */
+  .section-heading h2{font-size:22px}
+  .eyebrow{font-size:9px}
+
+  /* Topbar greeting fits */
+  .topbar h1{font-size:20px}
+
+  /* Stats cards tighter */
+  .stats article{padding:15px 16px}
+  .stats strong{font-size:22px}
+
+  /* Bottom nav is always reachable */
+  .mobile-nav{
+    left:10px;
+    right:10px;
+    bottom:10px;
+  }
+
+  /* Big primary buttons full width, no cramping */
+  .hero .primary,
+  .empty-actions button{
+    width:100%;
+    padding:13px 17px;
+  }
+}
+
+/* ============================================================
+   ☰ — floating on desktop, static in topbar on mobile
+   ============================================================ */
+
+.menu-button{
+  display:grid !important;
+  place-items:center;
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:var(--paper);
+  color:var(--ink);
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+  margin-right:14px;
+  transition:background .15s,color .15s,transform .05s;
+  flex:0 0 auto;
+}
+.menu-button:hover{background:#e5f1e7;color:#28764b}
+.menu-button:active{transform:scale(.94)}
+
+/* Desktop: ☰ floats fixed at top-left of the viewport */
+@media(min-width:781px){
+  .menu-button{
+    position:fixed;
+    top:18px;
+    left:18px;
+    z-index:60;
+    width:44px;
+    height:44px;
+    font-size:24px;
+    box-shadow:0 6px 18px #12342d33;
+    border-color:transparent;
+  }
+  .topbar{padding-left:60px}
+}
+
+/* Sidebar transitions */
+.sidebar{
+  transition:transform .22s ease, margin-left .22s ease;
+}
+
+@media(max-width:780px){
+  .sidebar{
+    position:fixed;
+    z-index:70;
+    transform:translateX(-100%);
+    height:100vh;
+    overflow-y:auto;
+  }
+  .sidebar.open{transform:translateX(0)}
+}
+
+@media(min-width:781px){
+  .sidebar.sidebar-hidden-desktop{
+    margin-left:-246px;
+  }
+}
+
+/* Dark mode */
+[data-theme="dark"] .menu-button{
+  background:#e3eee3;
+  color:#123f39;
+  border-color:#b9d2c1;
+}
+[data-theme="dark"] .menu-button:hover{
+  background:#c8ddd0;
+  color:#0b2721;
+}
+
+/* ============================================================
+   Desktop "Top" button — appears after scrolling
+   ============================================================ */
+.back-to-top{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:0;
+  background:var(--teal);
+  color:#fff;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 8px 22px #0a6d5c55;
+  display:grid;
+  place-items:center;
+  opacity:0;
+  pointer-events:none;
+  z-index:50;
+  transition:opacity .2s, transform .12s, background .15s;
+}
+.back-to-top.visible{
+  opacity:1;
+  pointer-events:auto;
+}
+.back-to-top:hover{background:#075447}
+.back-to-top:active{transform:scale(.92)}
+[data-theme="dark"] .back-to-top{
+  background:#69c2a5;
+  color:#0b2721;
+  box-shadow:0 8px 22px #00000055;
+}
+[data-theme="dark"] .back-to-top:hover{background:#4ba17d}
+
+@media(max-width:780px){
+  .back-to-top{display:none !important}
+}
+
+/* ============================================================
+   Desktop: shift sidebar content down so the floating ☰ doesn't
+   cover the biashara bridge logo
+   ============================================================ */
+@media(min-width:781px){
+  .sidebar{
+    padding-top:80px;   /* was 30px — gives the ☰ room above the logo */
+  }
+  .sidebar .brand{
+    margin-top:0;
+  }
+}
+
+/* ============================================================
+   Greeting brand mark
+   ============================================================ */
+.greeting-block{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.greeting-mark{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:#e89960;      /* same orange as the sidebar brand mark */
+  color:#173c37;
+  display:grid;
+  place-items:center;
+  font:700 22px Fraunces,serif;
+  flex:0 0 auto;
+  box-shadow:0 3px 10px #e8996033;
+}
+[data-theme="dark"] .greeting-mark{
+  background:#e89960;
+  color:#173c37;
+}
+
+/* Mobile: shrink the mark a little so it fits nicely */
+@media(max-width:780px){
+  .greeting-mark{
+    width:34px;
+    height:34px;
+    font-size:19px;
+    border-radius:10px;
+  }
+  .greeting-block{gap:9px}
+}
+
+/* ============================================================
+   Greeting block — align everything inline with the topbar
+   ============================================================ */
+
+/* The topbar should vertically centre its children */
+.topbar{
+  align-items:center;
+}
+
+/* The greeting group */
+.greeting-block{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex:1;               /* let it take the horizontal space it needs */
+  min-width:0;          /* allow text truncation on narrow screens */
+}
+
+/* The B mark */
+.greeting-mark{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:#e89960;
+  color:#173c37;
+  display:grid;
+  place-items:center;
+  font:700 24px Fraunces,serif;
+  flex:0 0 44px;
+  box-shadow:0 3px 10px #e8996033;
+  align-self:center;
+}
+
+/* The date + greeting text stack */
+.greeting-block > div{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  line-height:1.1;
+  min-width:0;
+}
+
+/* The eyebrow (date) needs less bottom margin now that we're inline */
+.greeting-block .eyebrow{
+  margin:0 0 4px;
+  font-size:10px;
+  letter-spacing:1.4px;
+}
+
+/* The greeting heading */
+.greeting-block h1{
+  font:600 24px Fraunces,serif;
+  margin:0;
+  letter-spacing:-.6px;
+  line-height:1.1;
+}
+
+/* Dark mode keeps the same colours */
+[data-theme="dark"] .greeting-mark{
+  background:#e89960;
+  color:#173c37;
+}
+
+/* Mobile — slightly smaller */
+@media(max-width:780px){
+  .greeting-block{gap:10px}
+  .greeting-mark{
+    width:36px;
+    height:36px;
+    font-size:20px;
+    border-radius:10px;
+    flex:0 0 36px;
+  }
+  .greeting-block h1{font-size:20px}
+  .greeting-block .eyebrow{font-size:9px;margin-bottom:3px}
+}
+
+/* ============================================================
+   Fix: remove the topbar left padding
+   (the floating ☰ sits over the sidebar, not the topbar)
+   ============================================================ */
+@media(min-width:781px){
+  .topbar{
+    padding-left:0 !important;
+    align-items:center;
+  }
+}
+
+/* Also reset any padding on the greeting group */
+.topbar > div:first-child{
+  padding-left:0 !important;
+}
+
+/* Ensure greeting block itself is left-aligned */
+.greeting-block{
+  justify-content:flex-start;
+  text-align:left;
+}
