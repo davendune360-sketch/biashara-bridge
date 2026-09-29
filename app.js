@@ -1897,3 +1897,14 @@ document.addEventListener('focusin', e => {
 // (the existing .add-order listener already runs, since
 //  we use the same class — nothing more needed)
 // ============================================================
+
+// ============================================================
+// Mobile bottom nav: "Top" scrolls back to the dashboard
+// ============================================================
+(function wireMobileTop(){
+  const btn = document.querySelector('#mobileTopBtn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
