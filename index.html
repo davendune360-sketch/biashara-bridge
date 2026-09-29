@@ -229,19 +229,40 @@
         <p class="cloud-dismiss-row"><button type="button" class="link-button" id="dismissCloud">Continue without signing in</button></p>
       </div>
 
-      <div id="requestCodeStep" hidden>
-        <p class="step-copy">Enter your registered email and we'll send a code to reset your password.</p>
-        <label>Registered email<input id="resetEmail" type="email" required placeholder="you@example.com" /></label>
-        <div class="cloud-actions"><button class="secondary" id="backToLoginFromRequest" type="button">Back to sign in</button><button class="primary" id="sendResetCode" type="button">Send code</button></div>
-      </div>
+      ```html
+<div id="requestCodeStep" hidden>
+  <p class="step-copy">Enter your registered email and we'll send a code to reset your password.</p>
+  <label>
+    Registered email
+    <input id="resetEmail" type="email" placeholder="you@example.com" />
+  </label>
+  <div class="cloud-actions">
+    <button class="secondary" id="backToLoginFromRequest" type="button">Back to sign in</button>
+    <button class="primary" id="sendResetCode" type="button">Send code</button>
+  </div>
+</div>
 
-      <div id="verifyCodeStep" hidden>
-        <p class="step-copy">Enter the code sent to <b id="resetEmailDisplay"></b> and choose a new password.</p>
-        <label>Code from your email<input id="resetCode" inputmode="numeric" autocomplete="one-time-code" required placeholder="e.g. 123456" /></label>
-        <label>New password<input id="resetNewPassword" type="password" required minlength="6" placeholder="At least 6 characters" /></label>
-        <label>Confirm new password<input id="resetConfirmPassword" type="password" required minlength="6" placeholder="Re-enter new password" /></label>
-        <div class="cloud-actions"><button class="secondary" id="backToLoginFromVerify" type="button">Back to sign in</button><button class="primary" id="confirmResetPassword" type="button">Reset password</button></div>
-      </div>
+<div id="verifyCodeStep" hidden>
+  <p class="step-copy">Enter the code sent to <b id="resetEmailDisplay"></b> and choose a new password.</p>
+  <label>
+    Code from your email
+    <input id="resetCode" inputmode="numeric" autocomplete="one-time-code" placeholder="e.g. 123456" />
+  </label>
+  <label>
+    New password
+    <input id="resetNewPassword" type="password" minlength="6" placeholder="At least 6 characters" />
+  </label>
+  <label>
+    Confirm new password
+    <input id="resetConfirmPassword" type="password" minlength="6" placeholder="Re-enter new password" />
+  </label>
+  <div class="cloud-actions">
+    <button class="secondary" id="backToLoginFromVerify" type="button">Back to sign in</button>
+    <button class="primary" id="confirmResetPassword" type="button">Reset password</button>
+  </div>
+</div>
+```
+
     </form>
   </dialog>
 
