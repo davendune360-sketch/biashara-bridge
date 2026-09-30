@@ -2048,3 +2048,65 @@ document.addEventListener('focusin', e => {
   // Initial sync
   syncScroll();
 })();
+
+// ============================================================
+// Floating mobile menu (phones only)
+// ============================================================
+(function setupMobileFab(){
+  const fab = document.querySelector('#mobileFab');
+  const menu = document.querySelector('#mobileFabMenu');
+  if (!fab || !menu) return;
+
+  function openMenu(){
+    menu.hidden = false;
+    fab.classList.add('is-open');
+    fab.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu(){
+    menu.hidden = true;
+    fab.classList.remove('is-open');
+    fab.setAttribute('aria-expanded', 'false');
+  }
+
+  fab.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.hidden ? openMenu() : closeMenu();
+  });
+
+  // "Top" action
+  menu.addEventListener('click', (e) => {
+    const target = e.target.closest('.fab-item');
+    if (!target) return;
+
+    // Top button
+    if (target.dataset.fabAction === 'top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      closeMenu();
+      return;
+    }
+
+    // Anchor links — close the menu and let the browser scroll
+    if (target.tagName === 'A') {
+      closeMenu();
+      return;
+    }
+
+    // Any other button (e.g. add-order) triggers its click handler then closes
+    closeMenu();
+  });
+
+  // Click outside closes the menu
+  document.addEventListener('click', (e) => {
+    if (!fab.contains(e.target) && !menu.contains(e.target)) closeMenu();
+  });
+
+  // Escape closes the menu
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // Close if we switch to tablet size
+  window.addEventListener('resize', () => {
+    if (window.matchMedia('(min-width:640px)').matches) closeMenu();
+  });
+})();
